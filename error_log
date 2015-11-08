@@ -1,0 +1,6 @@
+[18-Jun-2015 07:22:52 UTC] PHP Fatal error:  Class 'Bandbase' not found in /home/enoxhsi/public_html/www/models/header.php on line 26
+[18-Jun-2015 07:41:29 UTC] PHP Fatal error:  Class 'Sa' not found in /home/enoxhsi/public_html/www/test_start.php on line 8
+[07-Aug-2015 01:23:32 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'enoxh'@'localhost' (using password: YES) in /home/enoxhsi/public_html/preheader.php on line 39
+[07-Aug-2015 01:23:40 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'enoxh'@'localhost' (using password: YES) in /home/enoxhsi/public_html/preheader.php on line 39
+[07-Aug-2015 01:24:35 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'enoxh'@'localhost' (using password: YES) in /home/enoxhsi/public_html/preheader.php on line 39
+[07-Aug-2015 01:24:37 UTC] PHP Warning:  mysqli::mysqli(): (28000/1045): Access denied for user 'enoxh'@'localhost' (using password: YES) in /home/enoxhsi/public_html/preheader.php on line 39

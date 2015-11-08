@@ -1,0 +1,34 @@
+CACHE MANIFEST
+
+#version 1.0 6-28-2015
+
+CACHE:
+
+
+
+
+#internal HTML documents2sdf
+
+
+#style sheets
+http://sportanticipation.com/css/style.css
+http://sportanticipation.com/css/buttons.css
+http://sportanticipation.com/op/css/app.css
+http://sportanticipation.com/op/css/bootstrap.min.css
+
+#style sheet images
+http://sportanticipation.com/op/images/blank.gif
+http://sportanticipation.com/op/images/correct.gif
+http://sportanticipation.com/op/images/incorrect.gif
+
+#javascript files
+http://sportanticipation.com/op/js/jquery.min.js
+http://sportanticipation.com/op/js/bootstrap.min.js
+http://sportanticipation.com/op/js/script1.js
+
+#videos
+http://sportanticipation.com/op/videos/001/001.mp4
+http://sportanticipation.com/op/videos/001/002.mp4
+
+NETWORK:
+*

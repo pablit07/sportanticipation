@@ -1,0 +1,32 @@
+CACHE MANIFEST
+
+#version 1.0 6-289-2015
+
+CACHE:
+
+#images
+http://sportanticipation.com/op/images/blank.gif
+
+#internal HTML documentssadsa
+
+
+#style sheets
+http://sportanticipation.com/css/style.css
+http://sportanticipation.com/op/css/app.css
+http://sportanticipation.com/op/css/bootstrap.min.css
+
+#style sheet images
+http://sportanticipation.com/op/img/glyphicons-halflings-white.png
+http://sportanticipation.com/op/img/glyphicons-halflings.png
+
+#javascript files
+http://sportanticipation.com/op/js/jquery.min.js
+http://sportanticipation.com/op/js/bootstrap.min.js
+http://sportanticipation.com/op/js/script2.js
+
+#videos
+http://sportanticipation.com/op/videos/001/001.mp4
+http://sportanticipation.com/op/videos/001/002.mp4
+
+NETWORK:
+*

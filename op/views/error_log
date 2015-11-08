@@ -1,0 +1,1 @@
+[24-Jun-2015 08:45:42 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'enoxh'@'localhost' (using password: YES) in /home/enoxhsi/public_html/op/views/syncro.php on line 34

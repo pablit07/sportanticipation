@@ -1,0 +1,43 @@
+SportAnticipation
+
+Working Prototype/POC
+Build 1.0 Pre BETA
+Created by @ENOXH for SportAnticipation
+This code is the sole property of SportAnticipation with the exception of
+any public or open source API's or code sources that were used in which case respective licenses apply.
+
+
+The main portion of the site is written in PHP using a generic MVC format.
+The test portion is written in Javascript and HTML5.
+Also utilized were, Bootstrap 3, AJAXCRUD and jQuery
+
+
+Below are notes for any future developers regarding the status of the project at the end of phase 1.
+
+INSTALLATION
+There is no installer package for this app it is a php application that uses mysqli for database connection.
+Copying the database and data with the file structure to any LAMP server should allow you to deploy a local version of the entire site.
+
+The Testing portion itself was developed as a sub module of the website.
+Everything needed for the test to run independently of the website is included in the OP folder.
+
+The test is a standalone Javascript application, it connects to the site if the user is online and utilizes the database, if the user is offline the app will store data locally such as test results until it detects an Internet connection at which point it will immediately upload any locally stored data to the server then reset itself and any locally stored data.
+
+As long as the user does not clear the local data storage portion of their browser cache the data will remain persitently on the system.
+
+The pages related to the site itself are located in the root of the project folder.
+
+Pages and files related to the test are stored in the OP folder.
+
+The site uses HTML5 Manifests to cache all the files, scripts and videos for the prototype test. If for example a question or video is changed the Manifest file needs to be updated.
+
+The file is called manifest.appcache and resides in the root folder of the site.
+
+
+USAGE
+General usage is as follows.
+
+
+
+
+

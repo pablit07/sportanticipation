@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+<html manifest="manifest.appcache">
+-->
+
+<head>
+<script type="text/javascript">
+//CONDUCT SYSTEM CHECKS    
+console.log("SYSTEM CHECKS"); 
+
+  
+//CHECK IF MANIFEST IS CURRENT
+window.addEventListener('load', function(e) {
+if (window.applicationCache) {
+window.applicationCache.addEventListener('updateready', function(e) {
+if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+// Browser downloaded a new app cache.
+// Swap it in and reload the page to get the new hotness.
+window.applicationCache.swapCache();
+if (confirm('A new version of this site is available. Load it?')) {
+window.location.reload();
+}
+} else {
+// Manifest didn't changed. Nothing new to server.
+console.log("No Change to Manifest"); 
+}
+}, false);
+}
+}, false);  
+      
+
+
+</script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>SPORTANTICIPATION</title>
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../js/jquery.min.js"></script>
+    
+    
+    <script>        
+        
+        function clearBox(elementID)
+{
+    document.getElementById(elementID).innerHTML = "";
+}
+    </script>
+    
+    
+    
+<script src="../js/bootstrap.min.js"></script> 
+<script src="../js/script2.js"></script> 
+    
+    <script type="text/javascript">
+        
+    
+        
+
+</script>  
+    
+    
+    
+    
+    
+</head>
+    
+    
+<body>
+    
+<div id="loginbox"> </div> 
+    
+    <div id="container" > </div>
+        
+        
+        
+<div id="testcontainer"> </div>    
+       
+<div id="holder">
+<div class="container">
+<h2>Enter your Player ID</h2>
+  
+<input type="text" id="playerID" name="playerID"  />
+    <br/>
+    <h2>Select a batting side</h2>
+<Select name="batside">
+<option value="left">Left</option>
+<option value="right">Right</option>
+</select> 
+    <br/>
+<button class="btn btn-primary" onclick="GoLogin()">START</button>
+      
+</div> 
+<BR> <br/><br/> 
+
+<div id="tmode"></div> </div>
+    
+    
+    
+<div id="tmodebuttons">
+    <button class="btn btn-primary round raised" onclick="a()">Switch to Testing Mode</button>
+  </div>
+        <div id="netstatus"></div>
+    <div id="tmode"></div>
+        <div id="questionrow"></div>
+        <div id="answers"></div>
+
+    <div id="buttonrow"></div>
+  
+    <video id="video"></video>
+
+    
+   
+
+
+<script>
+$(function(){
+
+var video = $('video')[0];
+var answers = $('answers')[0];
+
+video.addEventListener('playing', function(){
+$('PLAY').fadeOut();
+
+
+})
+video.addEventListener('pause', function(){
+$('STOP').fadeOut();
+video.style.visibility='hidden';    
+answers.style.visibility='visible'; 
+
+})
+
+})
+</script> 
+</BODY>
+</HTML>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+<html manifest="manifest.appcache">
+-->
+
+<head>
+<script type="text/javascript">
+//CONDUCT SYSTEM CHECKS    
+console.log("SYSTEM CHECKS"); 
+
+/*   
+//CHECK IF MANIFEST IS CURRENT
+window.addEventListener('load', function(e) {
+if (window.applicationCache) {
+window.applicationCache.addEventListener('updateready', function(e) {
+if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+// Browser downloaded a new app cache.
+// Swap it in and reload the page to get the new hotness.
+window.applicationCache.swapCache();
+if (confirm('A new version of this site is available. Load it?')) {
+window.location.reload();
+}
+} else {
+// Manifest didn't changed. Nothing new to server.
+console.log("No Change to Manifest"); 
+}
+}, false);
+}
+}, false);  
+*/        
+
+
+</script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>SPORTANTICIPATION</title>
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="../css/app.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../../css/style.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script> 
+<script src="../js/script2.js"></script> 
+</head>
+    
+    
+<body>
+<div class="container" style="margin-top:50px;">
+    
+
+
+
+
+<script type="text/javascript">
+
+//PreTest();
+
+</script>
+    
+
+<!--javascripts-->    
+</div>  
+    
+    
+    
+<div id="loginbox" style="max-width:100%; text-align:center;"></div>
+<video id="video"></video>
+<div id="answers"></div>
+<div id="questionrow"></div>
+<div id="buttonrow"></div>
+    
+    
+</div>
+</div>
+</div>
+</div>        
+</div>
+
+<script>
+$(function(){
+
+var video = $('video')[0];
+var answers = $('answers')[0];
+
+video.addEventListener('playing', function(){
+$('PLAY').fadeOut();
+
+
+})
+video.addEventListener('pause', function(){
+$('STOP').fadeOut();
+video.style.visibility='hidden';    
+answers.style.visibility='visible'; 
+
+})
+
+})
+</script> 
+</BODY>
+</HTML>

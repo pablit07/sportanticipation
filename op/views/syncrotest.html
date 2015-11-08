@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SportAnticipation Syncro</title>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">  
+
+<script>
+
+pid = localStorage.pid;   
+sdate = localStorage.sessiondate;     
+sc = localStorage.savesessionid  ;    
+test_id = localStorage.test_id      ;
+test_created  = localStorage.test_created  ;
+test_description = localStorage.test_description   ;
+test_focus = localStorage.test_focus  ;
+test_question_count = localStorage.test_question_count   ;
+test_question_order = localStorage.test_question_order    ;
+test_team = localStorage.test_team  ;
+test_title = localStorage.test_title ;
+correct  = localStorage.correct  ;
+incorrect  = localStorage.incorrect   ;     
+
+console.log(correct);   
+console.log(incorrect);   
+
+
+
+if(navigator.onLine){
+
+for (var i = 1; i <= 5; i++) {
+var tick = function(i) {
+return function() {
+console.log(i);
+echo"Please Wait! Do Not Refresh Your Browser or leave this page."
+}
+};
+setTimeout(tick(i), 500 * i);
+}
+
+updateFunction();              
+
+}
+
+
+
+
+
+function updateFunction(){
+
+$.ajax({
+method: "POST",
+url: "syncro.php",
+data:{sc:sc, pid:pid, sdate:sdate, test_id:test_id, test_created:test_created, test_description:test_description, test_focus:test_focus, test_question_count:test_question_count, test_question_order:test_question_order, test_team:test_team, test_title :test_title, correct:correct, incorrect:incorrect}
+})
+
+.done(function( msg ) {
+console.log( "Data Saved: ");
+//localStorage.clear();
+//window.location = '../../account.php';    
+});
+
+
+}
+
+
+</script>    
+
+</head>
+
+<body></body>
+</html>
