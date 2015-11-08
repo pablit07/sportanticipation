@@ -82,14 +82,13 @@ if(!empty($_POST))
 require_once("models/header.php");
 echo "
 <body>
-<div class='container'>
-<div class='row'>
 ";
 
 include("top_nav.php");
 
 echo "
-</div>
+<div class='container'>
+
 
 
 ";
