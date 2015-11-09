@@ -1,0 +1,16 @@
+{
+  "name": "sportanticipation/sportanticipation",
+  "description": "",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Paul Kohlhoff",
+      "email": "paul.kohlhoff@gmail.com"
+    }
+  ],
+  "require": {
+    "slim/slim": "2.6.2",
+    "illuminate/database": "4.2.*"
+  }
+}
