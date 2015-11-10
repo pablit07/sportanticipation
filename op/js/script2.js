@@ -1,23 +1,20 @@
-
 // Sportanticipation Test
 
 
-
-
 //define vars
-var  startpoint;
-var  count;
-var  sdate;
+var startpoint;
+var count;
+var sdate;
 var bgcolor;
-var  testmode;
-var  testtype;
-var  pid;
+var testmode;
+var testtype;
+var pid;
 var getuid;
-var  battingside;
-var  getbatside;
-var  tid;
-var  sessioncount;
-var  rweonline;
+var battingside;
+var getbatside;
+var tid;
+var sessioncount;
+var rweonline;
 var uid;
 var datestamp;
 var current_question;
@@ -33,10 +30,9 @@ var questionCount;
 var button;
 
 //default test mode
-testmode="quiz";
+testmode = "quiz";
 //get the date
 datestamp = GetDate();
-
 
 
 //Test Modes
@@ -45,14 +41,14 @@ datestamp = GetDate();
 //-----------------------------//
 //-----------------------------//
 function b() {
-    
+
     testmode = 'quiz';
     document.getElementById('netstatus').innerHTML = 'QUIZ MODE';
     localStorage.testmode = testmode;
 }
 
 function a() {
-    
+
     testmode = 'test';
     document.getElementById('netstatus').innerHTML = 'TEST MODE';
     document.getElementById('tmodebuttons').innerHTML = '';
@@ -62,30 +58,28 @@ function a() {
 
 
 //batting sides
-    
-function c() {
-    
-    battingside = 'left';
-    localStorage.batside  = battingside;
-} 
 
+function c() {
+
+    battingside = 'left';
+    localStorage.batside = battingside;
+}
 
 
 function d() {
-   
+
     battingside = 'right';
-    localStorage.batside  = battingside;
+    localStorage.batside = battingside;
 }
 
 
-function ClearVariables(){
-   
+function ClearVariables() {
 
-    baseQs = numQsToAsk = testsessions =  useranswers = questionsasked =  anscount = qstoask = qsanswered = pid =  qansd = test_id =  battingside = video = videofull = questionresults = bgcolor = answered  = questId = testmode =  alertMsg = correct = incorrect = '';
+
+    baseQs = numQsToAsk = testsessions = useranswers = questionsasked = anscount = qstoask = qsanswered = pid = qansd = test_id = battingside = video = videofull = questionresults = bgcolor = answered = questId = testmode = alertMsg = correct = incorrect = '';
 
 
 }
-
 
 
 //-----------------------------//
@@ -94,19 +88,17 @@ function ClearVariables(){
 //CREATES A DATE STAMP
 
 function GetDate() {
- 
+
     d = new Date(),
-        minutes = d.getMinutes().toString().length == 1 ? '0'+d.getMinutes() : d.getMinutes(),
-        hours = d.getHours().toString().length == 1 ? '0'+d.getHours() : d.getHours(),
+        minutes = d.getMinutes().toString().length == 1 ? '0' + d.getMinutes() : d.getMinutes(),
+        hours = d.getHours().toString().length == 1 ? '0' + d.getHours() : d.getHours(),
         ampm = d.getHours() >= 12 ? 'pm' : 'am',
-        months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        mytimestamp = days[d.getDay()]+' '+months[d.getMonth()]+' '+d.getDate()+' '+d.getFullYear()+' '+hours+':'+minutes+ampm;
+        months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    mytimestamp = days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate() + ' ' + d.getFullYear() + ' ' + hours + ':' + minutes + ampm;
 
-return d;
+    return d;
 }
-
-
 
 
 //-----------------------------//
@@ -116,30 +108,30 @@ return d;
 // This Loads First //
 
 function PreTest() {
-  
-startpoint = 2, count = 1;
 
+    startpoint = 2, count = 1;
 
 
 //default bg color
-bgcolor="default";
+    bgcolor = "default";
 
 
-battingside =CheckForBatside();    
-    
+    battingside = CheckForBatside();
+
 //for future dev defines test id   
-tid = CheckForTestID();
+    tid = CheckForTestID();
 //see if session exists    
-sessionstate = CheckForSession;
-    SetupOfflineData(); 
+    sessionstate = CheckForSession;
+    SetupOfflineData();
 //if it does
-if (isset (pid)){
+    if (isset(pid)) {
 //start the existing test up    
-StartOldTest()
+        StartOldTest()
 
-}else{
+    } else {
 //otherwise start a new test
-StartNewTest();}
+        StartNewTest();
+    }
 }
 
 //-----------------------------//
@@ -147,19 +139,19 @@ StartNewTest();}
 //-----------------------------//
 
 
-function  StartNewTest(){
+function StartNewTest() {
 
 //NEW TEST
-sessioncount = 1;
+    sessioncount = 1;
 //SET THE DATA ARRAY FOR LOCALSTORAGE    
-SetupOfflineData(); 
-correct = 0;
-incorrect = 0;    
+    SetupOfflineData();
+    correct = 0;
+    incorrect = 0;
 
-console.log("START NEW TEST!"); 
- 
-    
-BuildATest("new");
+    console.log("START NEW TEST!");
+
+
+    BuildATest("new");
 }
 
 
@@ -168,86 +160,82 @@ BuildATest("new");
 //-----------------------------//
 
 //----------
-function  StartOldTest(){
+function StartOldTest() {
 
 //GET THE DATA ARRAY FOR LOCALSTORAGE        
-pid = localStorage.pid;   
-sdate = localStorage.sessiondate;     
-sc = localStorage.savesessionid  ;    
-test_id = localStorage.test_id      ;
-test_created  = localStorage.test_created  ;
-test_description = localStorage.test_description   ;
-test_focus = localStorage.test_focus  ;
-test_question_count = localStorage.test_question_count   ;
-test_question_order = localStorage.test_question_order    ;
-test_team = localStorage.test_team  ;
-test_title = localStorage.test_title ;
-correct  = localStorage.correct  ;
-incorrect  = localStorage.incorrect   ;   
+    pid = localStorage.pid;
+    sdate = localStorage.sessiondate;
+    sc = localStorage.savesessionid;
+    test_id = localStorage.test_id;
+    test_created = localStorage.test_created;
+    test_description = localStorage.test_description;
+    test_focus = localStorage.test_focus;
+    test_question_count = localStorage.test_question_count;
+    test_question_order = localStorage.test_question_order;
+    test_team = localStorage.test_team;
+    test_title = localStorage.test_title;
+    correct = localStorage.correct;
+    incorrect = localStorage.incorrect;
 //GetOfflineData();   
 
-console.log("RESUME EXISTING TEST!");
-IncreaseSessionCount(sessioncount);  
-  console.log('Session Count:'+sessioncount);  
+    console.log("RESUME EXISTING TEST!");
+    IncreaseSessionCount(sessioncount);
+    console.log('Session Count:' + sessioncount);
 
-BuildATest("old");   
+    BuildATest("old");
 }
 
 
+function GoLogin() {
 
-function GoLogin(){
-
-PreTest();
+    PreTest();
 
 }
-
-
-
 
 
 //-----------------------------//
 //--------------SetupOfflineData---------------//
 //-----------------------------//
 
-function SetupOfflineData(){
+function SetupOfflineData() {
 
 //debug
-console.log('Test ID:'+tid);
- 
-console.log('madeit');
+    console.log('Test ID:' + tid);
+
+    console.log('madeit');
 
 //GET THE DATA THEN SAVE AS LOCAL
-AJAX_JSON_Req('results.json', function (callback) {
-var data = callback;  
-chk = current_question + 1;
+    AJAX_JSON_Req('results.json', function (callback) {
+        var data = callback;
+        chk = current_question + 1;
 
-test_id = data[0].test_id;
-test_team = data[0].test_team;
-test_title = data[0].test_title;     
-test_created = data[0].test_created;    
-test_description = data[0].test_description;
-test_focus = data[0].test_focus;
-test_question_count = data[0].test_question_count;
-test_question_id = chk;
-test_question_question = data[0] .test_question_question;
-localStorage.sessiondate = sdate; 
-localStorage.test_title    =  test_title; 
-localStorage.test_id     = test_id  ;
-localStorage.test_team    = test_team ;
-localStorage.test_title    =  test_title;
-localStorage.test_created    = test_created ;
-localStorage.test_description    = test_description ;
-localStorage.test_focus    = test_focus ;
-localStorage.test_question_count    = test_question_count ;
-localStorage.test_question_order   = test_question_order ;
-localStorage.answers_correct   = correct  ;
-localStorage.answers_incorrect    = incorrect ;
-localStorage.test_question_id    = chk ;
-localStorage.test_question_count    = test_question_count ;
-console.log('TCC'+test_question_count);
+        test_id = data[0].test_id;
+        test_team = data[0].test_team;
+        test_title = data[0].test_title;
+        test_created = data[0].test_created;
+        test_description = data[0].test_description;
+        test_focus = data[0].test_focus;
+        test_question_count = data[0].test_question_count;
+        test_question_id = chk;
+        test_question_question = data[0].test_question_question;
+        localStorage.sessiondate = sdate;
+        localStorage.test_title = test_title;
+        localStorage.test_id = test_id;
+        localStorage.test_team = test_team;
+        localStorage.test_title = test_title;
+        localStorage.test_created = test_created;
+        localStorage.test_description = test_description;
+        localStorage.test_focus = test_focus;
+        localStorage.test_question_count = test_question_count;
+        localStorage.test_question_order = test_question_order;
+        localStorage.answers_correct = correct;
+        localStorage.answers_incorrect = incorrect;
+        localStorage.test_question_id = chk;
+        localStorage.test_question_count = test_question_count;
+        console.log('TCC' + test_question_count);
 
 
-});    
+    });
 
 }
 
@@ -255,87 +243,88 @@ console.log('TCC'+test_question_count);
 //-----------------------------//
 //------------BuildATest-----------------//
 //-----------------------------//
-function BuildATest(testtype){
-var tempcount = test_question_count;
-var startpoint=2; 
+function BuildATest(testtype) {
+    var tempcount = test_question_count;
+    var startpoint = 2;
 
 //----------------------------------RESUME
-if(testtype == 'old'){
-console.log('Old Test');
+    if (testtype == 'old') {
+        console.log('Old Test');
 
 //adds 2 to the object count which is where the questions start 
-current_question = 1;    
+        current_question = 1;
 
-AJAX_JSON_Req('results.json', function (callback) {
+        AJAX_JSON_Req('results.json', function (callback) {
 //data holds the test data received from JSON
-data = callback;
+            data = callback;
 //check if we got something
-console.log(data)   ;
+            console.log(data);
 
-console.log('New Test Has Begun'); 
-clearBox('holder');
-clearBox('tmodebuttons');
+            console.log('New Test Has Begun');
+            clearBox('holder');
+            clearBox('tmodebuttons');
 
 //Show the buttons
-ShowButtons(); 
+            ShowButtons();
 
 
 //get batting side
-console.log(battingside);
+            console.log(battingside);
 
-    
-    
-if (data[2].question_battingside == 0){batcomp = 'left';}    
-if (data[2].question_battingside == 1){batcomp = 'right';} 
-    
-if (data[2].question_battingside == batcomp){    
-    
+
+            if (data[2].question_battingside == 0) {
+                batcomp = 'left';
+            }
+            if (data[2].question_battingside == 1) {
+                batcomp = 'right';
+            }
+
+            if (data[2].question_battingside == batcomp) {
+
 //populate html    
-document.getElementById("questionrow").innerHTML = '<div class="question" ><h1>'+data[2].question_question +'</h1></div>   ';     
+                document.getElementById("questionrow").innerHTML = '<div class="question" ><h1>' + data[2].question_question + '</h1></div>   ';
 //Load the video
-LoadRndVideo(); 
-} 
-});
-}
-    
-    
-if(testtype == 'new'){
-console.log('Start New Test');
+                LoadRndVideo();
+            }
+        });
+    }
+
+
+    if (testtype == 'new') {
+        console.log('Start New Test');
 
 //adds 2 to the object count which is where the questions start 
-current_question = 1;    
+        current_question = 1;
 
-AJAX_JSON_Req('results.json', function (callback) {
+        AJAX_JSON_Req('results.json', function (callback) {
 //data holds the test data received from JSON
-data = callback;
+            data = callback;
 //check if we got something
-console.log(data)   ;
+            console.log(data);
 
-console.log('New Test Has Begun'); 
-clearBox('holder');
-clearBox('tmodebuttons');
+            console.log('New Test Has Begun');
+            clearBox('holder');
+            clearBox('tmodebuttons');
 
 //Show the buttons
-ShowButtons(); 
+            ShowButtons();
 
 
 //get batting side
-console.log(battingside);
+            console.log(battingside);
 
 //populate html    
-document.getElementById("questionrow").innerHTML = '<div class="question" ><h1>'+data[2].question_question +'</h1></div>   ';     
+            document.getElementById("questionrow").innerHTML = '<div class="question" ><h1>' + data[2].question_question + '</h1></div>   ';
 //Load the video
-LoadRndVideo(); 
-}); 
+            LoadRndVideo();
+        });
 
-}else{
-console.log('ERROR testype missmatch!');}      
+    } else {
+        console.log('ERROR testype missmatch!');
+    }
 
 
 }
-
-
-
 
 
 //-----------------------------//
@@ -343,31 +332,30 @@ console.log('ERROR testype missmatch!');}
 //-----------------------------//
 
 //----------
-function ShowButtons(){
-AJAX_JSON_Req('results.json', function (callback) {
+function ShowButtons() {
+    AJAX_JSON_Req('results.json', function (callback) {
 
-data=callback;
+        data = callback;
 
 
-ri= 0;
+        ri = 0;
 //get answers
-var answer_array = data[1].answer_answer; 
+        var answer_array = data[1].answer_answer;
 
 
 //create answerarray    
-answerarray = answer_array.split(',');  
-console.log(answerarray);
+        answerarray = answer_array.split(',');
+        console.log(answerarray);
 
 
-for(j=0;j<answerarray.length;j++) {
+        for (j = 0; j < answerarray.length; j++) {
 
-document.getElementById('buttonrow').innerHTML += ('<input type="button" class="btn btn-primary"  name="answer_' + ri + '" value="' + answerarray[ri] + '" id="answer_' + ri + '_' + j + '" class="question_' + ri + '" onclick="submitAnswer(' + ri + ', this, \'question_' + ri + '\', \'label_' + ri + '_' + j + '\')" />'); 
-ri++ ;
+            document.getElementById('buttonrow').innerHTML += ('<input type="button" class="btn btn-primary"  name="answer_' + ri + '" value="' + answerarray[ri] + '" id="answer_' + ri + '_' + j + '" class="question_' + ri + '" onclick="submitAnswer(' + ri + ', this, \'question_' + ri + '\', \'label_' + ri + '_' + j + '\')" />');
+            ri++;
 
-}}); 
+        }
+    });
 }
-
-
 
 
 //-----------------------------//
@@ -376,21 +364,21 @@ ri++ ;
 
 //
 
-function LoadRndVideo(){
+function LoadRndVideo() {
 
-video = data[startpoint].question_video;
+    video = data[startpoint].question_video;
 
-videofull = data[startpoint].question_alt_video;
-console.log(video);     
-console.log(videofull); 
+    videofull = data[startpoint].question_alt_video;
+    console.log(video);
+    console.log(videofull);
 
-document.getElementById("testcontainer").innerHTML ='<div id="netstatus" style="pull-left;"></div><div class="page-header"><h2 style="text-align:center; ">SPORTANTICIPATION</h2></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div class="container"><div id="status"></div><div id="questionrow"></div><div id="feedbackrow"></div><div id="answerrow" class="answerrow"><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div><div class="videorow" id="videorow"></div></div>';
+    document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="page-header"><h2 style="text-align:center; ">SPORTANTICIPATION</h2></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div class="container"><div id="status"></div><div id="questionrow"></div><div id="feedbackrow"></div><div id="answerrow" class="answerrow"><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div><div class="videorow" id="videorow"></div></div>';
 
-document.getElementById("videorow").innerHTML ='<div id="a"><video style="max-width:98%;" id="video"  autoplay><source src="../videos/001/'+video+'" type="video/mp4"/></video></div>';
+    document.getElementById("videorow").innerHTML = '<div id="a"><video style="max-width:98%;" id="video"  autoplay><source src="../videos/001/' + video + '" type="video/mp4"/></video></div>';
 
-document.getElementById("questionrow").innerHTML = '<div id="question"><p class="question">  ' + data[startpoint].question_question + ' <span id="result_' + startpoint + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>  </div> ';
+    document.getElementById("questionrow").innerHTML = '<div id="question"><p class="question">  ' + data[startpoint].question_question + ' <span id="result_' + startpoint + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>  </div> ';
 
-enableQuestion(test_id);
+    enableQuestion(test_id);
 
 }
 
@@ -401,47 +389,44 @@ enableQuestion(test_id);
 
 
 //---------
-function submitAnswer(buttonid, question, x, y ) {
-AJAX_JSON_Req('results.json', function (callback) {
+function submitAnswer(buttonid, question, x, y) {
+    AJAX_JSON_Req('results.json', function (callback) {
 
-data=callback;
-console.log('Submitted:'+buttonid) ;
-console.log('Submitted:'+question) ;    
-console.log('qid:'+current_question) ;   
-console.log('Submitted:'+y) ;   
+        data = callback;
+        console.log('Submitted:' + buttonid);
+        console.log('Submitted:' + question);
+        console.log('qid:' + current_question);
+        console.log('Submitted:' + y);
 
-ca = current_question + 1;
+        ca = current_question + 1;
 //check the answer
-cas = data[ca].answer_answer;
+        cas = data[ca].answer_answer;
 
 
+        if (testmode == "test") {
+
+            localStorage.answered = answerarray[buttonid];
+            SaveAQuestion();
+
+            correct++;
+            localStorage.correct++;
+            disableQuestion(test_id);//disables buttons
+            clearBox("questionrow");
+            contTest();
+
+        } else if (testmode == "quiz") {
+            document.getElementById("answerrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
+            localStorage.test_question_answered = answerarray[buttonid];
+            disableQuestion(test_id);//disables buttons
+            SaveAQuestion();
+            showResult(buttonid); //shows result
 
 
-if(testmode == "test"){
+        }
 
-localStorage.answered = answerarray[buttonid];
-SaveAQuestion();
-  
-correct++;
-localStorage.correct++ ;
-disableQuestion(test_id);//disables buttons
-clearBox("questionrow"); 
- contTest(); 
-
-} else if(testmode == "quiz"){
-document.getElementById("answerrow").innerHTML='<h2>You Answered: '+answerarray[buttonid]+'</h2>';
-localStorage.test_question_answered  = answerarray[buttonid];
-disableQuestion(test_id);//disables buttons 
-SaveAQuestion();
-showResult(buttonid); //shows result
-
-
-}
-
-}); 
+    });
 
 }//END
-
 
 
 //-----------------------------//
@@ -449,34 +434,33 @@ showResult(buttonid); //shows result
 //-----------------------------//
 
 
-function contTest(){
+function contTest() {
 
-console.log('saved')    
-AJAX_JSON_Req('results.json', function (callback) {
-data=callback;
+    console.log('saved')
+    AJAX_JSON_Req('results.json', function (callback) {
+        data = callback;
 
-test_question_count = data[0].test_question_count;   
-console.log('Current Question:' +current_question);
-console.log('Question Count:'+test_question_count);    
+        test_question_count = data[0].test_question_count;
+        console.log('Current Question:' + current_question);
+        console.log('Question Count:' + test_question_count);
 
-if(current_question >= test_question_count ){
-EndTest();  
-} else{
+        if (current_question >= test_question_count) {
+            EndTest();
+        } else {
 
-current_question++;      
+            current_question++;
 
-document.getElementById('answerrow').innerHTML='';
-document.getElementById('buttonrow').innerHTML='';
-LoadRndVideo(); 
-ShowButtons();
-document.getElementById("feedbackrow").innerHTML = '';
+            document.getElementById('answerrow').innerHTML = '';
+            document.getElementById('buttonrow').innerHTML = '';
+            LoadRndVideo();
+            ShowButtons();
+            document.getElementById("feedbackrow").innerHTML = '';
 
-document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   '; 
+            document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   ';
 
+        }
+    });
 }
-});
-}
-
 
 
 //-----------------------------//
@@ -484,27 +468,26 @@ document.getElementById("questionrow").innerHTML = '<p class="question">   <span
 //-----------------------------//
 
 
+function EndTest() {
 
-function EndTest(){
+    console.log("TEST OVER");
+    SaveATest();
+    var div = document.createElement('div');
 
-console.log("TEST OVER"); 
-SaveATest();
-var div = document.createElement('div');
+    div.id = "container";
 
-div.id = "container";
+    clearBox("answerrow");
+    clearBox("answers");
+    clearBox("questionrow");
+    clearBox("buttonrow");
 
-clearBox("answerrow");  
-clearBox("answers");
-clearBox("questionrow");
-clearBox("buttonrow");
+    clearBox("feedbackrow");
 
-clearBox("feedbackrow");
-
-document.getElementById("holder").innerHTML = ('<a href=" ../../account.php"  class="btn btn-primary" >Finish</a><div id="reportdiv">TEST COMPLETE</div><div style="text-align:center;" id="answerrow"></div><div style="text-align:center;" id="feedbackrow"></div><div id="buttonrow" style="text-align:center;"></div>');
+    document.getElementById("holder").innerHTML = ('<a href=" ../../account.php"  class="btn btn-primary" >Finish</a><div id="reportdiv">TEST COMPLETE</div><div style="text-align:center;" id="answerrow"></div><div style="text-align:center;" id="feedbackrow"></div><div id="buttonrow" style="text-align:center;"></div>');
 
 
 //console.log(questionresults);
-showScore();
+    showScore();
 
 
 }
@@ -516,29 +499,27 @@ showScore();
 
 
 function showScore() {
-SaveATest();
-console.log(correct=localStorage.correct);    
-console.log(localStorage.incorrect);     
-ls = localStorage.sessionCount;
-ls++;
-localStorage.sessionCount = ls;    
-var ansx=test_question_count
-tcorrect = correct ;
+    SaveATest();
+    console.log(correct = localStorage.correct);
+    console.log(localStorage.incorrect);
+    ls = localStorage.sessionCount;
+    ls++;
+    localStorage.sessionCount = ls;
+    var ansx = test_question_count
+    tcorrect = correct;
 //localStorage.correct=0;    
 //localStorage.incorrect=0;    
-var pc = Math.round(( tcorrect  / ansx) * 100);
+    var pc = Math.round(( tcorrect / ansx) * 100);
 
-document.getElementById("reportdiv").innerHTML = "<div > <h2>You scored " + correct  + " out of " + ansx + "</h2> ";
+    document.getElementById("reportdiv").innerHTML = "<div > <h2>You scored " + correct + " out of " + ansx + "</h2> ";
 
-document.getElementById("reportdiv").innerHTML  += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><div id='mainholder'></div>";
-localStorage.correct = correct;
+    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><div id='mainholder'></div>";
+    localStorage.correct = correct;
 
-tcorrect = ansx = pc = '';
-localStorage.correct = localStorage.incorrect = 0;
-document.getElementById("question").innerHTML = '';
+    tcorrect = ansx = pc = '';
+    localStorage.correct = localStorage.incorrect = 0;
+    document.getElementById("question").innerHTML = '';
 }
-
-
 
 
 //-----------------------------//
@@ -546,54 +527,52 @@ document.getElementById("question").innerHTML = '';
 //-----------------------------//
 
 
-
 //----------SHOW RESULT
 function showResult(button) {
 
-AJAX_JSON_Req('results.json', function (callback) {
-data = callback;
-chk = current_question + 1;
-ans = button+1;    
+    AJAX_JSON_Req('results.json', function (callback) {
+        data = callback;
+        chk = current_question + 1;
+        ans = button + 1;
 //check the answer
-LoadRndVideo(); 
+        LoadRndVideo();
 //console.log(data[chk].question_test_correct);
-console.log('ANS'+ans);    
+        console.log('ANS' + ans);
 
 
-document.getElementById("questionrow").innerHTML = '';
+        document.getElementById("questionrow").innerHTML = '';
 
-console.log(data[chk]);
+        console.log(data[chk]);
 
-xc = data[chk].question_test_correct;
+        xc = data[chk].question_test_correct;
 
 
 //if correct
-if(xc == ans) { 
-localStorage.answered = answerarray[buttonid];
-document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="SaveAQuestion()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ' ;
-  
-correct++;
-localStorage.correct++ ;
-disableQuestion(test_id);//disables buttons
-clearBox("questionrow");
-} else {
+        if (xc == ans) {
+            localStorage.answered = answerarray[buttonid];
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="SaveAQuestion()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
 
-ra=xc-1;
-answertext = answerarray[ra];
-localStorage.test_question_answer_correct =answertext;
+            correct++;
+            localStorage.correct++;
+            disableQuestion(test_id);//disables buttons
+            clearBox("questionrow");
+        } else {
+
+            ra = xc - 1;
+            answertext = answerarray[ra];
+            localStorage.test_question_answer_correct = answertext;
 //answertext = choices[ri][questionId];
-document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="SaveAQuestion()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: '+answertext+'</h2></div> </div>';
-   
-incorrect++
-localStorage.incorrect++;
-disableQuestion(test_id);//disables buttons
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="SaveAQuestion()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
 
+            incorrect++
+            localStorage.incorrect++;
+            disableQuestion(test_id);//disables buttons
+
+        }
+
+    });
+    clearBox("questionrow");
 }
-
-});
-clearBox("questionrow");
-}
-
 
 
 //-----------------------------//
@@ -601,14 +580,14 @@ clearBox("questionrow");
 //-----------------------------//
 
 function disableQuestion(test_id) {
-var alltags=document.all? document.all : document.getElementsByTagName("*")
-for (i=0; i<alltags.length; i++) {
-if (alltags[i].className == test_id) {
-alltags[i].disabled = true;
+    var alltags = document.all ? document.all : document.getElementsByTagName("*")
+    for (i = 0; i < alltags.length; i++) {
+        if (alltags[i].className == test_id) {
+            alltags[i].disabled = true;
 
 
-}
-}
+        }
+    }
 }
 
 
@@ -617,19 +596,17 @@ alltags[i].disabled = true;
 //-----------------------------//
 
 
-
 //----------PLAY THE FULL CLIP
-function play_full(){ 
-var vid = document.getElementById("a");
-vid.innerHTML  = ' <video  autoplay controls><source src="../videos/001/' + videofull + '" type="video/mp4" />';}
+function play_full() {
+    var vid = document.getElementById("a");
+    vid.innerHTML = ' <video  autoplay controls><source src="../videos/001/' + videofull + '" type="video/mp4" />';
+}
 
 //REPLAY THE CLIP
-function play_re() 
-{var vid = document.getElementById("a");
-vid.innerHTML  = ' <video  autoplay controls><source src="../videos/001/' + video + '" type="video/mp4" />';}
-
-
-
+function play_re() {
+    var vid = document.getElementById("a");
+    vid.innerHTML = ' <video  autoplay controls><source src="../videos/001/' + video + '" type="video/mp4" />';
+}
 
 
 //-----------------------------//
@@ -637,156 +614,174 @@ vid.innerHTML  = ' <video  autoplay controls><source src="../videos/001/' + vide
 //-----------------------------//
 
 
+function SaveATest() {
 
-function SaveATest(){
-
-AJAX_JSON_Req('results.json', function (callback) {
-data = callback;    
+    AJAX_JSON_Req('results.json', function (callback) {
+        data = callback;
 
 //general test information
 //test_id = data[0].test_id; 
-test_created = datestamp;    
-test_description = data[0].test_description;
-test_focus = data[0].test_focus;
-test_question_count = data[0].test_question_count;
-test_question_order = data[0].test_question_order;
-test_team = data[0].test_team;
-test_title = data[0].test_title; 
-mcorrect = localStorage.answers_correct;
-mincorrect = localStorage.answers_incorrectincorrect;
-console.log (localStorage.sessiondate = sdate); 
-console.log (localStorage.test_id     = test_id ) ;
-console.log (localStorage.test_created    = test_created );
-console.log (localStorage.test_description    = test_description) ;
-console.log (localStorage.test_focus    = test_focus );
-localStorage.test_question_count    = test_question_count;
-console.log (localStorage.test_question_order   = test_question_order) ;
-console.log (localStorage.test_team    = test_team) ;
-console.log (localStorage.test_title    =  test_title);
-console.log (localStorage.answers_correct   = correct  );
-console.log (localStorage.answers_incorrect    = incorrect );
-console.log('MADE IT');
-console.log ('Sdate'+localStorage.sessiondate );  
-console.log ('test_id'+ localStorage.test_id );  
-UpdateTest();
-}); 
+        test_created = datestamp;
+        test_description = data[0].test_description;
+        test_focus = data[0].test_focus;
+        test_question_count = data[0].test_question_count;
+        test_question_order = data[0].test_question_order;
+        test_team = data[0].test_team;
+        test_title = data[0].test_title;
+        mcorrect = localStorage.answers_correct;
+        mincorrect = localStorage.answers_incorrectincorrect;
+        console.log (localStorage.sessiondate = sdate);
+        console.log (localStorage.test_id = test_id);
+        console.log (localStorage.test_created = test_created);
+        console.log (localStorage.test_description = test_description);
+        console.log (localStorage.test_focus = test_focus);
+        localStorage.test_question_count = test_question_count;
+        console.log (localStorage.test_question_order = test_question_order);
+        console.log (localStorage.test_team = test_team);
+        console.log (localStorage.test_title = test_title);
+        console.log (localStorage.answers_correct = correct);
+        console.log (localStorage.answers_incorrect = incorrect);
+        console.log('MADE IT');
+        console.log ('Sdate' + localStorage.sessiondate);
+        console.log ('test_id' + localStorage.test_id);
+        UpdateTest();
+    });
 
 }
-
-
 
 
 //-----------------------------//
 //-------------UpdateTest----------------//
 //-----------------------------//
-function UpdateTest(){
-console.log('MADE IT-2');
-var xx = localStorage.savesessionid;
+function UpdateTest() {
+    console.log('MADE IT-2');
+    var xx = localStorage.savesessionid;
 
-sdate = localStorage.sessiondate;     
-test_id = localStorage.test_id      ;
-test_created  = localStorage.test_created  ;
-test_description = localStorage.test_description   ;
-test_focus = localStorage.test_focus  ;
-test_question_count = localStorage.test_question_count   ;
-test_question_order = localStorage.test_question_order    ;
-test_team = localStorage.test_team  ;
-test_title = localStorage.test_title ;
-correct  = localStorage.answers_correct ; 
-incorrect  = localStorage.answers_incorrect ;  
-test_question_id  = localStorage.test_question_id -1    ;
-test_question_answered = localStorage.test_question_answered     ;
-test_question_answer_correct  =localStorage.test_question_answer_correct   ;    
+    sdate = localStorage.sessiondate;
+    test_id = localStorage.test_id;
+    test_created = localStorage.test_created;
+    test_description = localStorage.test_description;
+    test_focus = localStorage.test_focus;
+    test_question_count = localStorage.test_question_count;
+    test_question_order = localStorage.test_question_order;
+    test_team = localStorage.test_team;
+    test_title = localStorage.test_title;
+    correct = localStorage.answers_correct;
+    incorrect = localStorage.answers_incorrect;
+    test_question_id = localStorage.test_question_id - 1;
+    test_question_answered = localStorage.test_question_answered;
+    test_question_answer_correct = localStorage.test_question_answer_correct;
 
 
-$.ajax({
-method: "POST",
-url: "syncrotest.php",
-data:{test_id:test_id,total_answered:current_question,correct:correct,pid:pid,test_created :test_created,test_team:test_team,test_title:test_title,sdate:sdate}
-}); 
+    $.ajax({
+        method: "POST",
+        url: "syncrotest.php",
+        data: {
+            test_id: test_id,
+            total_answered: current_question,
+            correct: correct,
+            pid: pid,
+            test_created: test_created,
+            test_team: test_team,
+            test_title: test_title,
+            sdate: sdate
+        }
+    });
 
 }
-
-
-
 
 
 //-----------------------------//
 //--------------SaveAQuestion---------------//
 //-----------------------------//
 
-function SaveAQuestion(){
+function SaveAQuestion() {
 
-console.log('sfunc');
+    console.log('sfunc');
 //GET THE DATA THEN SAVE AS LOCAL
-AJAX_JSON_Req('results.json', function (callback) {
-var data = callback;  
-chk = current_question + 1;
+    AJAX_JSON_Req('results.json', function (callback) {
+        var data = callback;
+        chk = current_question + 1;
 
-test_id = data[0].test_id;
-test_team = data[0].test_team;
-test_title = data[0].test_title;     
-test_created = datestamp;    
-test_description = data[0].test_description;
-test_focus = data[0].test_focus;
-test_question_count = data[0].test_question_count;
-test_question_id = chk;
+        test_id = data[0].test_id;
+        test_team = data[0].test_team;
+        test_title = data[0].test_title;
+        test_created = datestamp;
+        test_description = data[0].test_description;
+        test_focus = data[0].test_focus;
+        test_question_count = data[0].test_question_count;
+        test_question_id = chk;
 
-localStorage.sessiondate = sdate; 
-localStorage.test_title    =  test_title; 
-localStorage.test_id     = test_id  ;
-localStorage.test_team    = test_team ;
-localStorage.test_title    =  test_title;
-localStorage.test_created    = test_created ;
-localStorage.test_description    = test_description ;
-localStorage.test_focus    = test_focus ;
-localStorage.test_question_count    = test_question_count ;
-localStorage.test_question_order   = test_question_order ;
-localStorage.answers_correct   = correct  ;
-localStorage.answers_incorrect    = incorrect ;
-localStorage.test_question_id    = chk ;
+        localStorage.sessiondate = sdate;
+        localStorage.test_title = test_title;
+        localStorage.test_id = test_id;
+        localStorage.test_team = test_team;
+        localStorage.test_title = test_title;
+        localStorage.test_created = test_created;
+        localStorage.test_description = test_description;
+        localStorage.test_focus = test_focus;
+        localStorage.test_question_count = test_question_count;
+        localStorage.test_question_order = test_question_order;
+        localStorage.answers_correct = correct;
+        localStorage.answers_incorrect = incorrect;
+        localStorage.test_question_id = chk;
 
-UpdateQuestion();    
+        UpdateQuestion();
 
-});
+    });
 
 }
-
 
 
 //-----------------------------//
 //-------------UpdateQuestion----------------//
 //-----------------------------//
-function UpdateQuestion(){
+function UpdateQuestion() {
 
-var xx = localStorage.savesessionid;
+    var xx = localStorage.savesessionid;
 
-sdate = localStorage.sessiondate;     
-test_id = localStorage.test_id      ;
-test_created  = localStorage.test_created  ;
-test_description = localStorage.test_description   ;
-test_focus = localStorage.test_focus  ;
-test_question_count = localStorage.test_question_count   ;
-test_question_order = localStorage.test_question_order    ;
-test_team = localStorage.test_team  ;
-test_title = localStorage.test_title ;
-correct = localStorage.answers_correct;
-incorrect  = localStorage.answers_incorrect ;  
-test_question_id  = localStorage.test_question_id -1    ;
-test_question_answered = localStorage.test_question_answered     ;
-test_question_answer_correct  =localStorage.test_question_answer_correct   ;    
+    sdate = localStorage.sessiondate;
+    test_id = localStorage.test_id;
+    test_created = localStorage.test_created;
+    test_description = localStorage.test_description;
+    test_focus = localStorage.test_focus;
+    test_question_count = localStorage.test_question_count;
+    test_question_order = localStorage.test_question_order;
+    test_team = localStorage.test_team;
+    test_title = localStorage.test_title;
+    correct = localStorage.answers_correct;
+    incorrect = localStorage.answers_incorrect;
+    test_question_id = localStorage.test_question_id - 1;
+    test_question_answered = localStorage.test_question_answered;
+    test_question_answer_correct = localStorage.test_question_answer_correct;
 
 
-$.ajax({
-method: "POST",
-url: "syncroquestion.php",
-data:{sc:xx,pid:pid,sdate:datestamp,test_id:test_id,test_created:test_created,test_description:test_description,test_focus:test_focus,test_question_count:test_question_count,test_question_order:test_question_order,test_team:test_team,test_title:test_title,correct:correct,incorrect:incorrect,test_question_id:test_question_id,test_question_answered:test_question_answered,test_question_answer_correct:test_question_answer_correct}
-}); 
+    $.ajax({
+        method: "POST",
+        url: "syncroquestion.php",
+        data: {
+            sc: xx,
+            pid: pid,
+            sdate: datestamp,
+            test_id: test_id,
+            test_created: test_created,
+            test_description: test_description,
+            test_focus: test_focus,
+            test_question_count: test_question_count,
+            test_question_order: test_question_order,
+            test_team: test_team,
+            test_title: test_title,
+            correct: correct,
+            incorrect: incorrect,
+            test_question_id: test_question_id,
+            test_question_answered: test_question_answered,
+            test_question_answer_correct: test_question_answer_correct
+        }
+    });
 
-contTest();
+    contTest();
 
 }
-
 
 
 //-----------------------------//
@@ -794,11 +789,10 @@ contTest();
 //-----------------------------//
 
 function contains(arr, x) {
-return arr.filter(function(elem) { return elem == x }).length > 0;
+    return arr.filter(function (elem) {
+            return elem == x
+        }).length > 0;
 }
-
-
-
 
 
 //-----------------------------//
@@ -806,23 +800,22 @@ return arr.filter(function(elem) { return elem == x }).length > 0;
 //-----------------------------//
 
 //----------SAVE A STRING TO LOCALSTORAGE
-function saveSession () {
+function saveSession() {
 
-GetDate();
+    GetDate();
 
-var data = {'tpid':mypid, 'tdate':d, qansd:0,};
-localStorage.setItem('myData', JSON.stringify(data));
+    var data = {'tpid': mypid, 'tdate': d, qansd: 0,};
+    localStorage.setItem('myData', JSON.stringify(data));
 };
 
 //-----------------------------//
 //-------------LOAD A SESSION FROM LOCALSTORAGE----------------//
 //-----------------------------//
 
-function loadSession  () {
-var data = JSON.parse(localStorage.getItem('myData'));
-var someVar = data.mypid; // gives you 'pid'
+function loadSession() {
+    var data = JSON.parse(localStorage.getItem('myData'));
+    var someVar = data.mypid; // gives you 'pid'
 };
-
 
 
 //-----------------------------//
@@ -830,93 +823,79 @@ var someVar = data.mypid; // gives you 'pid'
 //-----------------------------//
 //
 function contains(a, obj) {
-var i = a.length;
-while (i--) {
-if (a[i] === obj) {
-return true;
+    var i = a.length;
+    while (i--) {
+        if (a[i] === obj) {
+            return true;
+        }
+    }
+    return false;
 }
-}
-return false;
-}
-
-
-
 
 
 //-----------------------------//
 //-------------SAVE A TEST TO LOCALSTORAGE as TSDATA----------------//
 //-----------------------------//
 
-function SaveTestSession () {
-var tsdata = {'tpid':pid, 'tdate':d, qansd:anscount };
-localStorage.setItem('tsData', JSON.stringify(tsdata));
+function SaveTestSession() {
+    var tsdata = {'tpid': pid, 'tdate': d, qansd: anscount};
+    localStorage.setItem('tsData', JSON.stringify(tsdata));
 };
-
-
-
 
 
 //-----------------------------//
 //--------------LOAD A SESSION FROM LOCALSTORAGE---------------//
 //-----------------------------//
-function LoadTestSession  () {
-var data = JSON.parse(localStorage.getItem('tsData'));
-var tsdate   = data.tsdate ;
-var qansd = data.qansd;    
-var tsanscount  = data.anscount; // gives you 'bar'
+function LoadTestSession() {
+    var data = JSON.parse(localStorage.getItem('tsData'));
+    var tsdate = data.tsdate;
+    var qansd = data.qansd;
+    var tsanscount = data.anscount; // gives you 'bar'
 
 };
-
-
 
 
 //-----------------------------//
 //--------------TEST AN ARRAY FOR EMPTY OR UNDEFINED---------------//
 //-----------------------------//
 //
-function CheckArray(qstoask){
+function CheckArray(qstoask) {
 
-if (qstoask === undefined || qstoask.length <1) {
-return false;
-}else{
+    if (qstoask === undefined || qstoask.length < 1) {
+        return false;
+    } else {
 
-return true;
+        return true;
+    }
 }
-}
-
-
-
 
 
 //-----------------------------//
 //------------CheckForPID(-----------------//
 //-----------------------------//
 
-function CheckForPID(){
+function CheckForPID() {
 // look for a pid stored locally 
-if (isset(localStorage.pid)){
-pid = localStorage.pid;
-console.log(pid);
-return getuid = false;
-} 
+    if (isset(localStorage.pid)) {
+        pid = localStorage.pid;
+        console.log(pid);
+        return getuid = false;
+    }
 }
-
-
-
 
 
 //-----------------------------//
 //--------------CheckForUID---------------//
 //-----------------------------//
-function CheckForUID(){
+function CheckForUID() {
 // get uid
-if (isset(localStorage.uid)){
-uid = localStorage.uid;
-return uid;
-}else{
-return  true;}
+    if (isset(localStorage.uid)) {
+        uid = localStorage.uid;
+        return uid;
+    } else {
+        return true;
+    }
 };
-
 
 
 //-----------------------------//
@@ -924,86 +903,86 @@ return  true;}
 //-----------------------------//
 
 function enableQuestion(test_id) {
-var alltags=document.all? document.all : document.getElementsByTagName("*")
-for (i=0; i<alltags.length; i++) {
-if (alltags[i].className == test_id) {
-alltags[i].disabled = false;
+    var alltags = document.all ? document.all : document.getElementsByTagName("*")
+    for (i = 0; i < alltags.length; i++) {
+        if (alltags[i].className == test_id) {
+            alltags[i].disabled = false;
 
-}
-}
+        }
+    }
 }
 
 
 //-----------------------------//
 //-------------CheckForSession----------------//
 //-----------------------------//
-function CheckForSession(){
-if(isset(localStorage.sessionCount)){
-testtype = 'old';    
-sessioncount = localStorage.sessionCount;  
+function CheckForSession() {
+    if (isset(localStorage.sessionCount)) {
+        testtype = 'old';
+        sessioncount = localStorage.sessionCount;
 //if a test session already exists get the info to use as a starting point    
-if(sessioncount > 1){
-GetSessionCounts();
-}  
-testtype = 'old';
-return sessioncount ;
-} else {
-testtype = 'new';
-sessioncount = 1;
-localStorage.sessionCount   = sessioncount;  
-return false;
-}  
+        if (sessioncount > 1) {
+            GetSessionCounts();
+        }
+        testtype = 'old';
+        return sessioncount;
+    } else {
+        testtype = 'new';
+        sessioncount = 1;
+        localStorage.sessionCount = sessioncount;
+        return false;
+    }
 }
 
 //-----------------------------//
 //-------------CheckForBatside----------------//
 //-----------------------------//
-function CheckForBatside(){
-if (isset(localStorage.batside)){
-battingside = localStorage.batside;
-return battingside;
-}else{
-return false;
-}
+function CheckForBatside() {
+    if (isset(localStorage.batside)) {
+        battingside = localStorage.batside;
+        return battingside;
+    } else {
+        return false;
+    }
 
 }
 
 //-----------------------------//
 //-------------CheckForTestID----------------//
 //-----------------------------//
-function CheckForTestID(){
+function CheckForTestID() {
 //testid always 1 in prototype this is for future development
-if(isset(localStorage.tid)){
-tid = localStorage.tid;
-return tid;
-}else{
-localStorage.tid = 1;    
-return false;
-};
+    if (isset(localStorage.tid)) {
+        tid = localStorage.tid;
+        return tid;
+    } else {
+        localStorage.tid = 1;
+        return false;
+    }
+    ;
 
 }
 
 //-----------------------------//
 //-------------IncreaseSessionCount----------------//
 //-----------------------------//
-function IncreaseSessionCount(sessioncount){
-sessioncount ++;
+function IncreaseSessionCount(sessioncount) {
+    sessioncount++;
 }
-
-
 
 
 //-----------------------------//
 //-----------------------------//
 //-----------------------------//
 //----------CHECK IF ONLINE
-function OnlineCheck(){
-if(navigator.onLine){
-rweonline = true;
-console.log("ONLINE"); 
-}else{rweonline=false;}}
-
-
+function OnlineCheck() {
+    if (navigator.onLine) {
+        rweonline = true;
+        console.log("ONLINE");
+    } else {
+        rweonline = false;
+    }
+}
 
 
 //-----------------------------//
@@ -1012,40 +991,33 @@ console.log("ONLINE");
 //Pulls data from JSON File Results.json
 
 function AJAX_JSON_Req(url, callback) {
-AJAX_req = new XMLHttpRequest();
-AJAX_req.open("GET", url, true);
-AJAX_req.setRequestHeader("Content-type", "application/json");
+    AJAX_req = new XMLHttpRequest();
+    AJAX_req.open("GET", url, true);
+    AJAX_req.setRequestHeader("Content-type", "application/json");
 
-AJAX_req.onreadystatechange = function() {
-if(AJAX_req.readyState == 4 && AJAX_req.status == 200){
-callback(JSON.parse(AJAX_req.responseText));
-}
-};
+    AJAX_req.onreadystatechange = function () {
+        if (AJAX_req.readyState == 4 && AJAX_req.status == 200) {
+            callback(JSON.parse(AJAX_req.responseText));
+        }
+    };
 
-AJAX_req.send();
+    AJAX_req.send();
 }
 
 
 // Function to load data from JSON
-console.log("LOAD DATA FROM JSON");     
+console.log("LOAD DATA FROM JSON");
 AJAX_JSON_Req('results.json', function (callback) {
-data = callback;
+    data = callback;
 //check if we got something
 
-});  
-
-
-
-
-
-
+});
 
 
 //-----------------------------//
 //-----------------------------//
 //-----------------------------//
-function isset ()
-{
+function isset() {
 // http://kevin.vanzonneveld.net
 // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
 // +   improved by: FremyCompany
@@ -1056,25 +1028,22 @@ function isset ()
 // *     example 2: isset( 'Kevin van Zonneveld' );
 // *     returns 2: true
 
-var a = arguments,
-l = a.length,
-i = 0,
-undef;
+    var a = arguments,
+        l = a.length,
+        i = 0,
+        undef;
 
-if (l === 0)
-{
-throw new Error('Empty isset');
-}
+    if (l === 0) {
+        throw new Error('Empty isset');
+    }
 
-while (i !== l)
-{
-if (a[i] === undef || a[i] === null)
-{
-return false;
-}
-i++;
-}
-return true;
+    while (i !== l) {
+        if (a[i] === undef || a[i] === null) {
+            return false;
+        }
+        i++;
+    }
+    return true;
 }
 
 
