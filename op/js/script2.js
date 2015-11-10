@@ -264,7 +264,7 @@ if(testtype == 'old'){
 console.log('Old Test');
 
 //adds 2 to the object count which is where the questions start 
-current_question = 1;    
+current_question = startpoint;
 
 AJAX_JSON_Req('results.json', function (callback) {
 //data holds the test data received from JSON
@@ -303,7 +303,7 @@ if(testtype == 'new'){
 console.log('Start New Test');
 
 //adds 2 to the object count which is where the questions start 
-current_question = 1;    
+current_question = startpoint;
 
 AJAX_JSON_Req('results.json', function (callback) {
 //data holds the test data received from JSON
@@ -378,9 +378,9 @@ ri++ ;
 
 function LoadRndVideo(){
 
-video = data[startpoint].question_video;
+video = data[current_question].question_video;
 
-videofull = data[startpoint].question_alt_video;
+videofull = data[current_question].question_alt_video;
 console.log(video);     
 console.log(videofull); 
 
@@ -388,7 +388,7 @@ document.getElementById("testcontainer").innerHTML ='<div id="netstatus" style="
 
 document.getElementById("videorow").innerHTML ='<div id="a"><video style="max-width:98%;" id="video"  autoplay><source src="../videos/001/'+video+'" type="video/mp4"/></video></div>';
 
-document.getElementById("questionrow").innerHTML = '<div id="question"><p class="question">  ' + data[startpoint].question_question + ' <span id="result_' + startpoint + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>  </div> ';
+document.getElementById("questionrow").innerHTML = '<div id="question"><p class="question">  ' + data[current_question].question_question + ' <span id="result_' + current_question + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>  </div> ';
 
 enableQuestion(test_id);
 
