@@ -55,8 +55,7 @@ array_push($linklist,$link1);
 
 //GET QUESTIONS
 
-
-$qa=mysqli_query($mysqli, "SELECT * FROM `st_questions`  ") or die(mysqli_error());
+$qa=mysqli_query($mysqli, "SELECT * FROM `st_questions` WHERE `question_test` = '$testid' ") or die(mysqli_error());
 
 while($res2 = $qa->fetch_assoc()){
 
