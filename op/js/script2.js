@@ -131,7 +131,9 @@ battingside =CheckForBatside();
 tid = CheckForTestID();
 //see if session exists    
 sessionstate = CheckForSession;
-    SetupOfflineData(); 
+    SetupOfflineData();
+
+
 //if it does
 if (isset (pid)){
 //start the existing test up    
@@ -139,6 +141,7 @@ StartOldTest()
 
 }else{
 //otherwise start a new test
+pid = localStorage.pid;
 StartNewTest();}
 }
 
@@ -697,7 +700,7 @@ correct  = localStorage.answers_correct ;
 incorrect  = localStorage.answers_incorrect ;  
 test_question_id  = localStorage.test_question_id -1    ;
 test_question_answered = localStorage.test_question_answered     ;
-test_question_answer_correct  =localStorage.test_question_answer_correct   ;    
+test_question_answer_correct  =localStorage.test_question_answer_correct   ;
 
 
 $.ajax({
@@ -775,7 +778,7 @@ correct = localStorage.answers_correct;
 incorrect  = localStorage.answers_incorrect ;  
 test_question_id  = localStorage.test_question_id -1    ;
 test_question_answered = localStorage.test_question_answered     ;
-test_question_answer_correct  =localStorage.test_question_answer_correct   ;    
+test_question_answer_correct  =localStorage.test_question_answer_correct   ;
 
 
 $.ajax({
