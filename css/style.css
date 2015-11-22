@@ -162,3 +162,12 @@ margin:0 auto; /* center your carousel if other than 100% */
 .active a{color:#5DB0E6;text-decoration:none;}
 li a{color:#eeeedd;background:#333;padding:5px;display:block;}
 li a:hover{text-decoration:none;}
+
+
+#SelectTestModal .container {
+    width: 250px;
+    position: relative;
+    top: 200px;
+    background-color: white;
+    padding: 10px;
+}

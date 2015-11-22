@@ -4,7 +4,7 @@ global $mysqli;
 include_once('../../models/db-settings.php');
 
 global $uid ;
-$testid=1;
+$testid=$_POST['test_id'];
 
 
 $linklist=array();
