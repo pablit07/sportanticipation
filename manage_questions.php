@@ -5,7 +5,8 @@
 	#the code for the class
 	include ('ajaxCRUD.class.php'); // <-- this include file MUST go first before any HTML/output
 
-
+	global $mysqli;
+	include_once('../../models/db-settings.php');
 
     #this one line of code is how you implement the class
     ########################################################
@@ -146,6 +147,37 @@ include_once('top_nav.php');
 	}
 
 ?>
-    <a href="op/views/makejson.php">Finalize Test</a>
+
+<?php
+$test_id_sql_results=mysqli_query($mysqli, "SELECT `question_test` FROM `st_questions` GROUP BY `question_test`") or die(mysqli_error());
+
+
+?>
+    <a data-toggle="modal" data-target="#SelectTestModal">Finalize Test</a>
+
+	<div class="modal" id="SelectTestModal">
+		<div class="container">
+			<form action="op/views/makejson.php" method="post">
+				<fieldset>
+				<label>Select Test: </label>
+					<?php
+						print_r($test_ids)
+					?>
+				<select name="test_id">
+					<?php
+
+						while ($row = $test_id_sql_results->fetch_array())
+						{
+							$test_id = $row['question_test'];
+							echo "<option value='$test_id'>".$test_id.'</option>';
+						}
+					?>
+				</select>
+				</fieldset>
+				<br/>
+				<input type="submit" value="Go"/>
+			</form>
+		</div>
+	</div>
     
 </div>
