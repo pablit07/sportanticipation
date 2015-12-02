@@ -14,8 +14,6 @@ var battingside;
 var getbatside;
 var tid;
 var sessioncount;
-var rweonline;
-var uid;
 var datestamp;
 var current_question;
 var test_question_order;
@@ -26,7 +24,6 @@ var enableQuestion;
 var test_id;
 var buttonid;
 var chk;
-var questionCount;
 var button;
 
 //default test mode
@@ -73,15 +70,6 @@ function d() {
 }
 
 
-function ClearVariables() {
-
-
-    baseQs = numQsToAsk = testsessions = useranswers = questionsasked = anscount = qstoask = qsanswered = pid = qansd = test_id = battingside = video = videofull = questionresults = bgcolor = answered = questId = testmode = alertMsg = correct = incorrect = '';
-
-
-}
-
-
 //-----------------------------//
 //-----------------------------//
 //-----------------------------//
@@ -89,7 +77,7 @@ function ClearVariables() {
 
 function GetDate() {
 
-    d = new Date(),
+    var d = new Date(),
         minutes = d.getMinutes().toString().length == 1 ? '0' + d.getMinutes() : d.getMinutes(),
         hours = d.getHours().toString().length == 1 ? '0' + d.getHours() : d.getHours(),
         ampm = d.getHours() >= 12 ? 'pm' : 'am',
@@ -423,7 +411,7 @@ function submitAnswer(buttonid, question, x, y) {
 
 function contTest() {
 
-    console.log('saved')
+    console.log('saved');
 
     test_question_count = data[0].test_question_count;
     console.log('Current Question:' + current_question);
@@ -488,7 +476,7 @@ function showScore() {
     ls = localStorage.sessionCount;
     ls++;
     localStorage.sessionCount = ls;
-    var ansx = test_question_count
+    var ansx = test_question_count;
     tcorrect = correct;
 //localStorage.correct=0;    
 //localStorage.incorrect=0;    
@@ -535,7 +523,7 @@ function checkAnswer(button, isTest) {
             document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
         }
 
-        incorrect++
+        incorrect++;
         localStorage.incorrect++;
 
         if (!isTest) {
@@ -576,7 +564,7 @@ function showResult(button) {
 //-----------------------------//
 
 function disableQuestion(test_id) {
-    var alltags = document.all ? document.all : document.getElementsByTagName("*")
+    var alltags = document.all ? document.all : document.getElementsByTagName("*");
     for (i = 0; i < alltags.length; i++) {
         if (alltags[i].className == test_id) {
             alltags[i].disabled = true;
@@ -776,33 +764,6 @@ function contains(arr, x) {
 }
 
 
-//-----------------------------//
-//--------------SAVE A STRING TO LOCALSTORAGE---------------//
-//-----------------------------//
-
-//----------SAVE A STRING TO LOCALSTORAGE
-function saveSession() {
-
-    GetDate();
-
-    var data = {'tpid': mypid, 'tdate': d, qansd: 0,};
-    localStorage.setItem('myData', JSON.stringify(data));
-};
-
-//-----------------------------//
-//-------------LOAD A SESSION FROM LOCALSTORAGE----------------//
-//-----------------------------//
-
-function loadSession() {
-    var data = JSON.parse(localStorage.getItem('myData'));
-    var someVar = data.mypid; // gives you 'pid'
-};
-
-
-//-----------------------------//
-//-------------CHECK IF OBJ IS CONTAINED IN A STRING----------------//
-//-----------------------------//
-//
 function contains(a, obj) {
     var i = a.length;
     while (i--) {
@@ -812,87 +773,6 @@ function contains(a, obj) {
     }
     return false;
 }
-
-
-//-----------------------------//
-//-------------SAVE A TEST TO LOCALSTORAGE as TSDATA----------------//
-//-----------------------------//
-
-function SaveTestSession() {
-    var tsdata = {'tpid': pid, 'tdate': d, qansd: anscount};
-    localStorage.setItem('tsData', JSON.stringify(tsdata));
-};
-
-
-//-----------------------------//
-//--------------LOAD A SESSION FROM LOCALSTORAGE---------------//
-//-----------------------------//
-function LoadTestSession() {
-    var data = JSON.parse(localStorage.getItem('tsData'));
-    var tsdate = data.tsdate;
-    var qansd = data.qansd;
-    var tsanscount = data.anscount; // gives you 'bar'
-
-};
-
-
-//-----------------------------//
-//--------------TEST AN ARRAY FOR EMPTY OR UNDEFINED---------------//
-//-----------------------------//
-//
-function CheckArray(qstoask) {
-
-    if (qstoask === undefined || qstoask.length < 1) {
-        return false;
-    } else {
-
-        return true;
-    }
-}
-
-
-//-----------------------------//
-//------------CheckForPID(-----------------//
-//-----------------------------//
-
-function CheckForPID() {
-// look for a pid stored locally 
-    if (isset(localStorage.pid)) {
-        pid = localStorage.pid;
-        console.log(pid);
-        return getuid = false;
-    }
-}
-
-
-//-----------------------------//
-//--------------CheckForUID---------------//
-//-----------------------------//
-function CheckForUID() {
-// get uid
-    if (isset(localStorage.uid)) {
-        uid = localStorage.uid;
-        return uid;
-    } else {
-        return true;
-    }
-};
-
-
-//-----------------------------//
-//---------------ENABLE BUTTON--------------//
-//-----------------------------//
-
-function enableQuestion(test_id) {
-    var alltags = document.all ? document.all : document.getElementsByTagName("*")
-    for (i = 0; i < alltags.length; i++) {
-        if (alltags[i].className == test_id) {
-            alltags[i].disabled = false;
-
-        }
-    }
-}
-
 
 //-----------------------------//
 //-------------CheckForSession----------------//
@@ -956,16 +836,6 @@ function IncreaseSessionCount(sessioncount) {
 //-----------------------------//
 //-----------------------------//
 //----------CHECK IF ONLINE
-function OnlineCheck() {
-    if (navigator.onLine) {
-        rweonline = true;
-        console.log("ONLINE");
-    } else {
-        rweonline = false;
-    }
-}
-
-
 //-----------------------------//
 //-----------------------------//
 //-----------------------------//
