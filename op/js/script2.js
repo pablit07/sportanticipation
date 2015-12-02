@@ -410,10 +410,10 @@ function submitAnswer(buttonid, question, x, y) {
         if (testmode == "test") {
 
             localStorage.answered = answerarray[buttonid];
+            chk = current_question + 1;
+            checkAnswer(buttonid, true);
             SaveAQuestion();
 
-            correct++;
-            localStorage.correct++;
             disableQuestion(test_id);//disables buttons
             clearBox("questionrow");
             contTest();
@@ -525,6 +525,46 @@ function showScore() {
     document.getElementById("question").innerHTML = '';
 }
 
+function checkAnswer(button, isTest) {
+    xc = data[chk].question_test_correct;
+    ans = button + 1;
+
+//if correct
+    if (xc == ans) {
+        localStorage.answered = answerarray[buttonid];
+
+        if (!isTest) {
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="SaveAQuestion()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
+        }
+
+        correct++;
+        localStorage.correct++;
+
+        if (!isTest) {
+            disableQuestion(test_id);//disables buttons
+            clearBox("questionrow");
+        }
+
+    } else {
+
+        ra = xc - 1;
+        answertext = answerarray[ra];
+        localStorage.test_question_answer_correct = answertext;
+//answertext = choices[ri][questionId];
+
+        if (!isTest) {
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="SaveAQuestion()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
+        }
+
+        incorrect++
+        localStorage.incorrect++;
+
+        if (!isTest) {
+            disableQuestion(test_id);//disables buttons
+        }
+
+    }
+}
 
 //-----------------------------//
 //------------SHOW RESULT OF A QUESTION-----------------//
@@ -532,47 +572,23 @@ function showScore() {
 
 
 //----------SHOW RESULT
+
 function showResult(button) {
 
     AJAX_JSON_Req('results.json', function (callback) {
         data = callback;
         chk = current_question + 1;
-        ans = button + 1;
+
 //check the answer
         LoadRndVideo();
 //console.log(data[chk].question_test_correct);
-        console.log('ANS' + ans);
 
 
         document.getElementById("questionrow").innerHTML = '';
 
         console.log(data[chk]);
 
-        xc = data[chk].question_test_correct;
-
-
-//if correct
-        if (xc == ans) {
-            localStorage.answered = answerarray[buttonid];
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="SaveAQuestion()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
-
-            correct++;
-            localStorage.correct++;
-            disableQuestion(test_id);//disables buttons
-            clearBox("questionrow");
-        } else {
-
-            ra = xc - 1;
-            answertext = answerarray[ra];
-            localStorage.test_question_answer_correct = answertext;
-//answertext = choices[ri][questionId];
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="SaveAQuestion()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
-
-            incorrect++
-            localStorage.incorrect++;
-            disableQuestion(test_id);//disables buttons
-
-        }
+        checkAnswer(button, testmode == "test");
 
     });
     clearBox("questionrow");
