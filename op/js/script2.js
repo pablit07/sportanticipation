@@ -207,38 +207,32 @@ function SetupOfflineData() {
 
     console.log('madeit');
 
-//GET THE DATA THEN SAVE AS LOCAL
-    AJAX_JSON_Req('results.json', function (callback) {
-        var data = callback;
-        chk = current_question + 1;
+    chk = current_question + 1;
 
-        test_id = data[0].test_id;
-        test_team = data[0].test_team;
-        test_title = data[0].test_title;
-        test_created = data[0].test_created;
-        test_description = data[0].test_description;
-        test_focus = data[0].test_focus;
-        test_question_count = data[0].test_question_count;
-        test_question_id = chk;
-        test_question_question = data[0].test_question_question;
-        localStorage.sessiondate = sdate;
-        localStorage.test_title = test_title;
-        localStorage.test_id = test_id;
-        localStorage.test_team = test_team;
-        localStorage.test_title = test_title;
-        localStorage.test_created = test_created;
-        localStorage.test_description = test_description;
-        localStorage.test_focus = test_focus;
-        localStorage.test_question_count = test_question_count;
-        localStorage.test_question_order = test_question_order;
-        localStorage.answers_correct = correct;
-        localStorage.answers_incorrect = incorrect;
-        localStorage.test_question_id = chk;
-        localStorage.test_question_count = test_question_count;
-        console.log('TCC' + test_question_count);
-
-
-    });
+    test_id = data[0].test_id;
+    test_team = data[0].test_team;
+    test_title = data[0].test_title;
+    test_created = data[0].test_created;
+    test_description = data[0].test_description;
+    test_focus = data[0].test_focus;
+    test_question_count = data[0].test_question_count;
+    test_question_id = chk;
+    test_question_question = data[0].test_question_question;
+    localStorage.sessiondate = sdate;
+    localStorage.test_title = test_title;
+    localStorage.test_id = test_id;
+    localStorage.test_team = test_team;
+    localStorage.test_title = test_title;
+    localStorage.test_created = test_created;
+    localStorage.test_description = test_description;
+    localStorage.test_focus = test_focus;
+    localStorage.test_question_count = test_question_count;
+    localStorage.test_question_order = test_question_order;
+    localStorage.answers_correct = correct;
+    localStorage.answers_incorrect = incorrect;
+    localStorage.test_question_id = chk;
+    localStorage.test_question_count = test_question_count;
+    console.log('TCC' + test_question_count);
 
 }
 
@@ -309,10 +303,6 @@ function BuildATest(testtype) {
             clearBox('holder');
             clearBox('tmodebuttons');
 
-//Show the buttons
-            ShowButtons();
-
-
 //get batting side
             console.log(battingside);
 
@@ -320,6 +310,8 @@ function BuildATest(testtype) {
             document.getElementById("questionrow").innerHTML = '<div class="question" ><h1>' + data[2].question_question + '</h1></div>   ';
 //Load the video
             LoadRndVideo();
+
+            ShowButtons();
         });
 
     } else {
@@ -336,11 +328,6 @@ function BuildATest(testtype) {
 
 //----------
 function ShowButtons() {
-    AJAX_JSON_Req('results.json', function (callback) {
-
-        data = callback;
-
-
         ri = 0;
 //get answers
         var answer_array = data[1].answer_answer;
@@ -357,7 +344,6 @@ function ShowButtons() {
             ri++;
 
         }
-    });
 }
 
 
@@ -394,41 +380,38 @@ function LoadRndVideo() {
 
 //---------
 function submitAnswer(buttonid, question, x, y) {
-    AJAX_JSON_Req('results.json', function (callback) {
 
-        data = callback;
-        console.log('Submitted:' + buttonid);
-        console.log('Submitted:' + question);
-        console.log('qid:' + current_question);
-        console.log('Submitted:' + y);
+    console.log('Submitted:' + buttonid);
+    console.log('Submitted:' + question);
+    console.log('qid:' + current_question);
+    console.log('Submitted:' + y);
 
-        ca = current_question + 1;
+    ca = current_question + 1;
 //check the answer
-        cas = data[ca].answer_answer;
+    cas = data[ca].answer_answer;
 
 
-        if (testmode == "test") {
+    if (testmode == "test") {
 
-            localStorage.answered = answerarray[buttonid];
-            chk = current_question + 1;
-            checkAnswer(buttonid, true);
-            SaveAQuestion();
+        localStorage.answered = answerarray[buttonid];
+        chk = current_question + 1;
+        checkAnswer(buttonid, true);
 
-            disableQuestion(test_id);//disables buttons
-            clearBox("questionrow");
-            contTest();
+        SaveAQuestion();
 
-        } else if (testmode == "quiz") {
-            document.getElementById("answerrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
-            localStorage.test_question_answered = buttonid;// answerarray[buttonid];
-            disableQuestion(test_id);//disables buttons
-            SaveAQuestion();
-            showResult(buttonid); //shows result
+        disableQuestion(test_id);//disables buttons
+        clearBox("questionrow");
+        contTest();
+
+    } else if (testmode == "quiz") {
+        document.getElementById("answerrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
+        localStorage.test_question_answered = buttonid;// answerarray[buttonid];
+        disableQuestion(test_id);//disables buttons
+        SaveAQuestion();
+        showResult(buttonid); //shows result
 
 
-        }
-
-    });
+    }
 
 }//END
 
@@ -441,29 +424,26 @@ function submitAnswer(buttonid, question, x, y) {
 function contTest() {
 
     console.log('saved')
-    AJAX_JSON_Req('results.json', function (callback) {
-        data = callback;
 
-        test_question_count = data[0].test_question_count;
-        console.log('Current Question:' + current_question);
-        console.log('Question Count:' + test_question_count);
+    test_question_count = data[0].test_question_count;
+    console.log('Current Question:' + current_question);
+    console.log('Question Count:' + test_question_count);
 
-        if (current_question >= test_question_count) {
-            EndTest();
-        } else {
+    if (current_question >= test_question_count) {
+        EndTest();
+    } else {
 
-            current_question++;
+        current_question++;
 
-            document.getElementById('answerrow').innerHTML = '';
-            document.getElementById('buttonrow').innerHTML = '';
-            LoadRndVideo();
-            ShowButtons();
-            document.getElementById("feedbackrow").innerHTML = '';
+        document.getElementById('answerrow').innerHTML = '';
+        document.getElementById('buttonrow').innerHTML = '';
+        LoadRndVideo();
+        ShowButtons();
+        document.getElementById("feedbackrow").innerHTML = '';
 
-            document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   ';
+        document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   ';
 
-        }
-    });
+    }
 }
 
 
@@ -503,7 +483,6 @@ function EndTest() {
 
 
 function showScore() {
-    SaveATest();
     console.log(correct = localStorage.correct);
     console.log(localStorage.incorrect);
     ls = localStorage.sessionCount;
@@ -534,7 +513,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="SaveAQuestion()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
         }
 
         correct++;
@@ -553,7 +532,7 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="SaveAQuestion()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
         }
 
         incorrect++
@@ -575,22 +554,19 @@ function checkAnswer(button, isTest) {
 
 function showResult(button) {
 
-    AJAX_JSON_Req('results.json', function (callback) {
-        data = callback;
-        chk = current_question + 1;
+    chk = current_question + 1;
 
 //check the answer
-        LoadRndVideo();
+    LoadRndVideo();
 //console.log(data[chk].question_test_correct);
 
 
-        document.getElementById("questionrow").innerHTML = '';
+    document.getElementById("questionrow").innerHTML = '';
 
-        console.log(data[chk]);
+    console.log(data[chk]);
 
-        checkAnswer(button, testmode == "test");
+    checkAnswer(button, testmode == "test");
 
-    });
     clearBox("questionrow");
 }
 
@@ -636,37 +612,32 @@ function play_re() {
 
 function SaveATest() {
 
-    AJAX_JSON_Req('results.json', function (callback) {
-        data = callback;
-
 //general test information
 //test_id = data[0].test_id; 
-        test_created = datestamp;
-        test_description = data[0].test_description;
-        test_focus = data[0].test_focus;
-        test_question_count = data[0].test_question_count;
-        test_question_order = data[0].test_question_order;
-        test_team = data[0].test_team;
-        test_title = data[0].test_title;
-        correct = localStorage.answers_correct;
-        incorrect = localStorage.answers_incorrect;
-        console.log (localStorage.sessiondate = sdate);
-        console.log (localStorage.test_id = test_id);
-        console.log (localStorage.test_created = test_created);
-        console.log (localStorage.test_description = test_description);
-        console.log (localStorage.test_focus = test_focus);
-        localStorage.test_question_count = test_question_count;
-        console.log (localStorage.test_question_order = test_question_order);
-        console.log (localStorage.test_team = test_team);
-        console.log (localStorage.test_title = test_title);
-        console.log (localStorage.answers_correct = correct);
-        console.log (localStorage.answers_incorrect = incorrect);
-        console.log('MADE IT');
-        console.log ('Sdate' + localStorage.sessiondate);
-        console.log ('test_id' + localStorage.test_id);
-        UpdateTest();
-    });
-
+    test_created = datestamp;
+    test_description = data[0].test_description;
+    test_focus = data[0].test_focus;
+    test_question_count = data[0].test_question_count;
+    test_question_order = data[0].test_question_order;
+    test_team = data[0].test_team;
+    test_title = data[0].test_title;
+    correct = localStorage.answers_correct;
+    incorrect = localStorage.answers_incorrect;
+    console.log (localStorage.sessiondate = sdate);
+    console.log (localStorage.test_id = test_id);
+    console.log (localStorage.test_created = test_created);
+    console.log (localStorage.test_description = test_description);
+    console.log (localStorage.test_focus = test_focus);
+    localStorage.test_question_count = test_question_count;
+    console.log (localStorage.test_question_order = test_question_order);
+    console.log (localStorage.test_team = test_team);
+    console.log (localStorage.test_title = test_title);
+    console.log (localStorage.answers_correct = correct);
+    console.log (localStorage.answers_incorrect = incorrect);
+    console.log('MADE IT');
+    console.log ('Sdate' + localStorage.sessiondate);
+    console.log ('test_id' + localStorage.test_id);
+    UpdateTest();
 }
 
 
@@ -717,39 +688,32 @@ function UpdateTest() {
 
 function SaveAQuestion() {
 
-    console.log('sfunc');
-//GET THE DATA THEN SAVE AS LOCAL
-    AJAX_JSON_Req('results.json', function (callback) {
-        var data = callback;
-        chk = current_question + 1;
+    chk = current_question + 1;
 
-        test_id = data[0].test_id;
-        test_team = data[0].test_team;
-        test_title = data[0].test_title;
-        test_created = datestamp;
-        test_description = data[0].test_description;
-        test_focus = data[0].test_focus;
-        test_question_count = data[0].test_question_count;
-        test_question_id = chk;
+    test_id = data[0].test_id;
+    test_team = data[0].test_team;
+    test_title = data[0].test_title;
+    test_created = datestamp;
+    test_description = data[0].test_description;
+    test_focus = data[0].test_focus;
+    test_question_count = data[0].test_question_count;
+    test_question_id = chk;
 
-        localStorage.sessiondate = sdate;
-        localStorage.test_title = test_title;
-        localStorage.test_id = test_id;
-        localStorage.test_team = test_team;
-        localStorage.test_title = test_title;
-        localStorage.test_created = test_created;
-        localStorage.test_description = test_description;
-        localStorage.test_focus = test_focus;
-        localStorage.test_question_count = test_question_count;
-        localStorage.test_question_order = test_question_order;
-        localStorage.answers_correct = correct;
-        localStorage.answers_incorrect = incorrect;
-        localStorage.test_question_id = chk;
+    localStorage.sessiondate = sdate;
+    localStorage.test_title = test_title;
+    localStorage.test_id = test_id;
+    localStorage.test_team = test_team;
+    localStorage.test_title = test_title;
+    localStorage.test_created = test_created;
+    localStorage.test_description = test_description;
+    localStorage.test_focus = test_focus;
+    localStorage.test_question_count = test_question_count;
+    localStorage.test_question_order = test_question_order;
+    localStorage.answers_correct = correct;
+    localStorage.answers_incorrect = incorrect;
+    localStorage.test_question_id = chk;
 
-        UpdateQuestion();
-
-    });
-
+    UpdateQuestion();
 }
 
 
@@ -798,9 +762,6 @@ function UpdateQuestion() {
             test_question_answer_correct: test_question_answer_correct
         }
     });
-
-    contTest();
-
 }
 
 
