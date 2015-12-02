@@ -593,6 +593,16 @@ function play_re() {
 }
 
 
+function enableQuestion(test_id) {
+    var alltags = document.all ? document.all : document.getElementsByTagName("*")
+    for (i = 0; i < alltags.length; i++) {
+        if (alltags[i].className == test_id) {
+            alltags[i].disabled = false;
+
+        }
+    }
+}
+
 //-----------------------------//
 //-------------SAVES THE RESULTS TO LOCALSTORAGE----------------//
 //-----------------------------//
