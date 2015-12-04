@@ -545,7 +545,6 @@ function showResult(button) {
     chk = current_question + 1;
 
 //check the answer
-    LoadRndVideo();
 //console.log(data[chk].question_test_correct);
 
 
@@ -588,8 +587,18 @@ function play_full() {
 
 //REPLAY THE CLIP
 function play_re() {
-    var vid = document.getElementById("a");
-    vid.innerHTML = ' <video  autoplay controls><source src="../videos/001/' + video + '" type="video/mp4" />';
+    var question_index = (startpoint + current_question) - 1;
+
+    video = data[question_index].question_video;
+
+    videofull = data[question_index].question_alt_video;
+    console.log(video);
+    console.log(videofull);
+
+    document.getElementById("testcontainer").innerHTML += '<div class="videorow" id="videorow"></div>';
+
+    document.getElementById("videorow").innerHTML = '<div id="a"><video style="max-width:98%;" id="video"  autoplay><source src="../videos/001/' + video + '" type="video/mp4"/></video></div>';
+
 }
 
 
