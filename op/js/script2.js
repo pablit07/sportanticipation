@@ -359,7 +359,7 @@ function LoadRndVideo() {
     enableQuestion(test_id);
 
     $('.question').text(data[question_index].question_question);
-
+    $('#watchFullReplay').hide();
 }
 
 
@@ -507,7 +507,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button id="watchFullReplay" style="display: none;" type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
         }
 
         correct++;
@@ -526,7 +526,7 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button id="watchFullReplay" style="display: none;" type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
         }
 
         incorrect++;
@@ -593,6 +593,7 @@ function play_full() {
 
 //REPLAY THE CLIP
 function play_re() {
+    $('#watchFullReplay').show();
     var question_index = (startpoint + current_question) - 1;
 
     video = data[question_index].question_video;
