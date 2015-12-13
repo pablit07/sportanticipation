@@ -358,6 +358,8 @@ function LoadRndVideo() {
 
     enableQuestion(test_id);
 
+    $('.question').text(data[question_index].question_question);
+
 }
 
 
@@ -429,7 +431,6 @@ function contTest() {
         ShowButtons();
         document.getElementById("feedbackrow").innerHTML = '';
 
-        document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   ';
 
     }
 }
@@ -454,6 +455,9 @@ function EndTest() {
     clearBox("buttonrow");
 
     clearBox("feedbackrow");
+
+    if ($('#videorow').length)
+        clearBox("videorow");
 
     document.getElementById("holder").innerHTML = ('<a href=" ../../account.php"  class="btn btn-primary" >Finish</a><div id="reportdiv">TEST COMPLETE</div><div style="text-align:center;" id="answerrow"></div><div style="text-align:center;" id="feedbackrow"></div><div id="buttonrow" style="text-align:center;"></div>');
 
@@ -484,12 +488,14 @@ function showScore() {
 
     document.getElementById("reportdiv").innerHTML = "<div > <h2>You scored " + correct + " out of " + ansx + "</h2> ";
 
-    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><div id='mainholder'></div>";
+    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><h2><div id='mainholder'></div></h2>";
     localStorage.correct = correct;
 
     tcorrect = ansx = pc = '';
     localStorage.correct = localStorage.incorrect = 0;
-    document.getElementById("question").innerHTML = '';
+
+    $('.question').text('');
+    $('#mainholder').text(data[0].test_title);
 }
 
 function checkAnswer(button, isTest) {
