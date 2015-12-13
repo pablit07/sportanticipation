@@ -6,7 +6,6 @@
 	include ('ajaxCRUD.class.php'); // <-- this include file MUST go first before any HTML/output
 
 	global $mysqli;
-	include_once('../../models/db-settings.php');
 
     #this one line of code is how you implement the class
     ########################################################
