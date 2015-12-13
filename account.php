@@ -8,7 +8,7 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 require_once("models/header.php");
 
 if(isset($loggedInUser->user_id)){
-echo $uid = $loggedInUser->user_id;
+// echo $uid = $loggedInUser->user_id;
 $_SESSION['uid']=$uid;
 
 }
@@ -36,7 +36,7 @@ localStorage.batside = 'left';
 <div class="col-md-4">
 <div class="well">
 
-<h1> <a href="op/views/index1.html">PITCHING CUES</a></h1>
+<h1><a href="op/views/index1.html" style="display:none" id="activeTest"></a></h1>
 
 </div>  
 </div>  
@@ -46,6 +46,15 @@ localStorage.batside = 'left';
 </div> <!--row-->       
 
 </div><!--container-->  
+
+<script type="text/javascript">
+	$.ajax('results.json').done(function(data) {
+
+		$('#activeTest')
+			.text(data[0].test_title)
+			.show();
+	});
+</script>
     
 </body>
 </html>
