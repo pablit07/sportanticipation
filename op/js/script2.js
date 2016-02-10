@@ -358,8 +358,6 @@ function LoadRndVideo() {
 
     enableQuestion(test_id);
 
-    $('.question').text(data[question_index].question_question);
-    $('#watchFullReplay').hide();
 }
 
 
@@ -431,6 +429,7 @@ function contTest() {
         ShowButtons();
         document.getElementById("feedbackrow").innerHTML = '';
 
+        document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   ';
 
     }
 }
@@ -455,9 +454,6 @@ function EndTest() {
     clearBox("buttonrow");
 
     clearBox("feedbackrow");
-
-    if ($('#videorow').length)
-        clearBox("videorow");
 
     document.getElementById("holder").innerHTML = ('<a href=" ../../account.php"  class="btn btn-primary" >Finish</a><div id="reportdiv">TEST COMPLETE</div><div style="text-align:center;" id="answerrow"></div><div style="text-align:center;" id="feedbackrow"></div><div id="buttonrow" style="text-align:center;"></div>');
 
@@ -488,14 +484,12 @@ function showScore() {
 
     document.getElementById("reportdiv").innerHTML = "<div > <h2>You scored " + correct + " out of " + ansx + "</h2> ";
 
-    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><h2><div id='mainholder'></div></h2>";
+    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><div id='mainholder'></div>";
     localStorage.correct = correct;
 
     tcorrect = ansx = pc = '';
     localStorage.correct = localStorage.incorrect = 0;
-
-    $('.question').text('');
-    $('#mainholder').text(data[0].test_title);
+    document.getElementById("question").innerHTML = '';
 }
 
 function checkAnswer(button, isTest) {
@@ -507,7 +501,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button id="watchFullReplay" style="display: none;" type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
         }
 
         correct++;
@@ -526,7 +520,7 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button id="watchFullReplay" style="display: none;" type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
         }
 
         incorrect++;
@@ -593,7 +587,6 @@ function play_full() {
 
 //REPLAY THE CLIP
 function play_re() {
-    $('#watchFullReplay').show();
     var question_index = (startpoint + current_question) - 1;
 
     video = data[question_index].question_video;
