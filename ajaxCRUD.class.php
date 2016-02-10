@@ -51,12 +51,12 @@
          # a date in the past
          header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 
-         $table      = isset($_REQUEST["table"]) ? $_REQUEST["table"] : "";
-         $pk         = isset($_REQUEST["pk"]) ? trim($_REQUEST["pk"]) : "";
-         $field      = isset($_REQUEST["field"]) ? trim($_REQUEST["field"]) : "";
-         $id      = isset($_REQUEST["id"]) ? $_REQUEST["id"] : "";
-         $val     = isset($_REQUEST["val"]) ? $_REQUEST["val"] : "";
-         $table_num  = isset($_REQUEST["table_num"]) ? $_REQUEST["table_num"] : "";
+         $table      = isset($_REQUEST["table"]) ? $mysqliConn->escape_string($_REQUEST["table"]) : "";
+         $pk         = isset($_REQUEST["pk"]) ? $mysqliConn->escape_string(trim($_REQUEST["pk"])) : "";
+         $field      = isset($_REQUEST["field"]) ? $mysqliConn->escape_string(trim($_REQUEST["field"])) : "";
+         $id      = isset($_REQUEST["id"]) ? $mysqliConn->escape_string($_REQUEST["id"]) : "";
+         $val     = isset($_REQUEST["val"]) ? $mysqliConn->escape_string($_REQUEST["val"]): "";
+         $table_num  = isset($_REQUEST["table_num"]) ? $mysqliConn->escape_string($_REQUEST["table_num"]) : "";
 
          if (!is_numeric($id)){
             $sql_id = "\"$id\"";
@@ -290,7 +290,7 @@ class ajaxCRUD{
     var $emptyTableMessage;
 
    /* these default to english words (e.g. "Add", "Delete" below); but can be
-      changed by setting them via $obj->addText = "Añadir"
+      changed by setting them via $obj->addText = "Aï¿½adir"
    */
    var $addText, $deleteText, $cancelText, $actionText, $fileDeleteText, $fileEditText; //text values for buttons and other table text
    var $addButtonText; //if you want to replace the entire add button text with a phrase or other text. Added in 8.81
