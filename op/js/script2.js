@@ -689,7 +689,8 @@ function UpdateTest() {
             test_created: test_created,
             test_team: test_team,
             test_title: test_title,
-            sdate: sdate
+            sdate: sdate,
+            is_test_mode: testmode === 'test' ? 1 : 0
         }
     });
 
@@ -773,7 +774,8 @@ function UpdateQuestion() {
             incorrect: incorrect,
             test_question_id: test_question_id,
             test_question_answered: test_question_answered,
-            test_question_answer_correct: test_question_answer_correct
+            test_question_answer_correct: test_question_answer_correct,
+            is_test_mode: testmode === 'test' ? 1 : 0
         }
     });
 }
