@@ -178,7 +178,7 @@ function StartOldTest() {
 
 
 function GoLogin() {
-
+    $('#start').hide();
     PreTest();
 
 }

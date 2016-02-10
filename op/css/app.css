@@ -88,3 +88,30 @@
     background-color: #C1A72F !important;
 }
 
+#start {
+    position: fixed;
+    top: 40%;
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    padding-left: 17px;
+    opacity: 0.4;
+    border: none;
+}
+
+#start:hover,
+#start:active,
+#start:focus {
+	opacity: 1;
+}
+
+.caret-right {
+    border-bottom: 30px solid transparent;
+    border-top: 30px solid transparent;
+    border-left: 40px solid;
+    display: inline-block;
+    height: 0;
+    opacity: 0.3;
+    vertical-align: top;
+    width: 0;
+}

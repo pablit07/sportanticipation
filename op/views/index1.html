@@ -76,7 +76,7 @@ console.log("No Change to Manifest");
 </head>
     
     
-<body>
+<body style="background-color: #000;">
     
 <div id="loginbox"> </div> 
     
@@ -129,37 +129,16 @@ console.log("No Change to Manifest");
 
 <div id="testcontainer"> </div>    
        
-<div id="holder">
-<div class="container">
-    <h2>Select a batting side</h2>
-<Select name="batside">
-<option value="left">Left</option>
-<option value="right">Right</option>
-</select> 
-    <br/>
-<button class="btn btn-primary" onclick="GoLogin()">START</button>
-      
-</div> 
-<BR> <br/><br/> 
+<button id="start" onclick="GoLogin()"><b class="caret-right"></b></button>
 
-<div id="tmode"></div> </div>
-    
-    
-    
-<div id="tmodebuttons">
-    <button class="btn btn-primary round raised" onclick="a()">Switch to Testing Mode</button>
-  </div>
-        <div id="netstatus"></div>
-    <div id="tmode"></div>
-        <div id="questionrow"></div>
-        <div id="answers"></div>
+<div id="holder"></div>
+<div id="tmodebuttons"></div>
+<div id="netstatus"></div>
+<div id="tmode"></div>
+<div id="questionrow"></div>
+<div id="answers"></div>
 
-    <div id="buttonrow"></div>
-  
-
-    
-   
-
+<div id="buttonrow"></div>
 
 <script>
 $(function(){
