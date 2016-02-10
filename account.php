@@ -8,7 +8,7 @@ if (!securePage($_SERVER['PHP_SELF'])){die();}
 require_once("models/header.php");
 
 if(isset($loggedInUser->user_id)){
-// echo $uid = $loggedInUser->user_id;
+$uid = $loggedInUser->user_id;
 $_SESSION['uid']=$uid;
 
 }
@@ -48,7 +48,7 @@ localStorage.batside = 'left';
 </div><!--container-->  
 
 <script type="text/javascript">
-	$.ajax('results.json').done(function(data) {
+	$.ajax('op/views/results.json').done(function(data) {
 
 		$('#activeTest')
 			.text(data[0].test_title)

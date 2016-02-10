@@ -5,6 +5,10 @@
 
 <head>
 <script type="text/javascript">
+if (document.cookie.indexOf('forcereload=true') > -1) {
+	document.cookie = 'forcereload='
+	window.location.reload(true);
+}
 //CONDUCT SYSTEM CHECKS    
 console.log("SYSTEM CHECKS"); 
 

@@ -50,7 +50,7 @@ function a() {
     document.getElementById('netstatus').innerHTML = 'TEST MODE';
     document.getElementById('tmodebuttons').innerHTML = '';
     localStorage.testmode = testmode;
-    console.log(testmode);
+    //console.log(testmode);
 }
 
 
@@ -139,7 +139,7 @@ function StartNewTest() {
     correct = 0;
     incorrect = 0;
 
-    console.log("START NEW TEST!");
+    //console.log("START NEW TEST!");
 
 
     BuildATest("new");
@@ -169,9 +169,9 @@ function StartOldTest() {
     incorrect = localStorage.incorrect;
 //GetOfflineData();   
 
-    console.log("RESUME EXISTING TEST!");
+    //console.log("RESUME EXISTING TEST!");
     IncreaseSessionCount(sessioncount);
-    console.log('Session Count:' + sessioncount);
+    //console.log('Session Count:' + sessioncount);
 
     BuildATest("old");
 }
@@ -191,9 +191,9 @@ function GoLogin() {
 function SetupOfflineData() {
 
 //debug
-    console.log('Test ID:' + tid);
+    //console.log('Test ID:' + tid);
 
-    console.log('madeit');
+    //console.log('madeit');
 
     chk = current_question + 1;
 
@@ -220,7 +220,7 @@ function SetupOfflineData() {
     localStorage.answers_incorrect = incorrect;
     localStorage.test_question_id = chk;
     localStorage.test_question_count = test_question_count;
-    console.log('TCC' + test_question_count);
+    //console.log('TCC' + test_question_count);
 
 }
 
@@ -234,7 +234,7 @@ function BuildATest(testtype) {
 
 //----------------------------------RESUME
     if (testtype == 'old') {
-        console.log('Old Test');
+        //console.log('Old Test');
 
 //adds 2 to the object count which is where the questions start 
         current_question = 1;
@@ -243,9 +243,9 @@ function BuildATest(testtype) {
 //data holds the test data received from JSON
             data = callback;
 //check if we got something
-            console.log(data);
+            //console.log(data);
 
-            console.log('New Test Has Begun');
+            //console.log('New Test Has Begun');
             clearBox('holder');
             clearBox('tmodebuttons');
 
@@ -254,7 +254,7 @@ function BuildATest(testtype) {
 
 
 //get batting side
-            console.log(battingside);
+            //console.log(battingside);
 
 
             if (data[2].question_battingside == 0) {
@@ -276,7 +276,7 @@ function BuildATest(testtype) {
 
 
     if (testtype == 'new') {
-        console.log('Start New Test');
+        //console.log('Start New Test');
 
 //adds 2 to the object count which is where the questions start 
         current_question = 1;
@@ -285,14 +285,14 @@ function BuildATest(testtype) {
 //data holds the test data received from JSON
             data = callback;
 //check if we got something
-            console.log(data);
+            //console.log(data);
 
-            console.log('New Test Has Begun');
+            //console.log('New Test Has Begun');
             clearBox('holder');
             clearBox('tmodebuttons');
 
 //get batting side
-            console.log(battingside);
+            //console.log(battingside);
 
 //populate html    
             document.getElementById("questionrow").innerHTML = '<div class="question" ><h1>' + data[2].question_question + '</h1></div>   ';
@@ -303,7 +303,7 @@ function BuildATest(testtype) {
         });
 
     } else {
-        console.log('ERROR testype missmatch!');
+        //console.log('ERROR testype missmatch!');
     }
 
 
@@ -323,7 +323,7 @@ function ShowButtons() {
 
 //create answerarray    
         answerarray = answer_array.split(',');
-        console.log(answerarray);
+        //console.log(answerarray);
 
 
         for (j = 0; j < answerarray.length; j++) {
@@ -347,8 +347,8 @@ function LoadRndVideo() {
     video = data[question_index].question_video;
 
     videofull = data[question_index].question_alt_video;
-    console.log(video);
-    console.log(videofull);
+    //console.log(video);
+    //console.log(videofull);
 
     document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div id="feedbackrow"></div><div id="answerrow" class="answerrow"><div class="btn-group"><div id="buttonrow" class="buttonrow"></div><div class="videorow" id="videorow"></div></div>';
 
@@ -358,8 +358,6 @@ function LoadRndVideo() {
 
     enableQuestion(test_id);
 
-    $('.question').text(data[question_index].question_question);
-    $('#watchFullReplay').hide();
 }
 
 
@@ -371,10 +369,10 @@ function LoadRndVideo() {
 //---------
 function submitAnswer(buttonid, question, x, y) {
 
-    console.log('Submitted:' + buttonid);
-    console.log('Submitted:' + question);
-    console.log('qid:' + current_question);
-    console.log('Submitted:' + y);
+    //console.log('Submitted:' + buttonid);
+    //console.log('Submitted:' + question);
+    //console.log('qid:' + current_question);
+    //console.log('Submitted:' + y);
 
     ca = current_question + 1;
 //check the answer
@@ -413,11 +411,11 @@ function submitAnswer(buttonid, question, x, y) {
 
 function contTest() {
 
-    console.log('saved');
+    //console.log('saved');
 
     test_question_count = data[0].test_question_count;
-    console.log('Current Question:' + current_question);
-    console.log('Question Count:' + test_question_count);
+    //console.log('Current Question:' + current_question);
+    //console.log('Question Count:' + test_question_count);
 
     if (current_question >= test_question_count) {
         EndTest();
@@ -431,6 +429,7 @@ function contTest() {
         ShowButtons();
         document.getElementById("feedbackrow").innerHTML = '';
 
+        document.getElementById("questionrow").innerHTML = '<p class="question">   <span id="result_' + ri + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>   ';
 
     }
 }
@@ -443,7 +442,7 @@ function contTest() {
 
 function EndTest() {
 
-    console.log("TEST OVER");
+    //console.log("TEST OVER");
     SaveATest();
     var div = document.createElement('div');
 
@@ -455,9 +454,6 @@ function EndTest() {
     clearBox("buttonrow");
 
     clearBox("feedbackrow");
-
-    if ($('#videorow').length)
-        clearBox("videorow");
 
     document.getElementById("holder").innerHTML = ('<a href=" ../../account.php"  class="btn btn-primary" >Finish</a><div id="reportdiv">TEST COMPLETE</div><div style="text-align:center;" id="answerrow"></div><div style="text-align:center;" id="feedbackrow"></div><div id="buttonrow" style="text-align:center;"></div>');
 
@@ -475,8 +471,6 @@ function EndTest() {
 
 
 function showScore() {
-    console.log(correct = localStorage.correct);
-    console.log(localStorage.incorrect);
     ls = localStorage.sessionCount;
     ls++;
     localStorage.sessionCount = ls;
@@ -488,14 +482,12 @@ function showScore() {
 
     document.getElementById("reportdiv").innerHTML = "<div > <h2>You scored " + correct + " out of " + ansx + "</h2> ";
 
-    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><h2><div id='mainholder'></div></h2>";
+    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><div id='mainholder'></div>";
     localStorage.correct = correct;
 
     tcorrect = ansx = pc = '';
     localStorage.correct = localStorage.incorrect = 0;
-
-    $('.question').text('');
-    $('#mainholder').text(data[0].test_title);
+    document.getElementById("question").innerHTML = '';
 }
 
 function checkAnswer(button, isTest) {
@@ -507,7 +499,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button id="watchFullReplay" style="display: none;" type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
         }
 
         correct++;
@@ -526,7 +518,7 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button id="watchFullReplay" style="display: none;" type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
+            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
         }
 
         incorrect++;
@@ -556,7 +548,6 @@ function showResult(button) {
 
     document.getElementById("questionrow").innerHTML = '';
 
-    console.log(data[chk]);
 
     checkAnswer(button, testmode == "test");
 
@@ -593,14 +584,13 @@ function play_full() {
 
 //REPLAY THE CLIP
 function play_re() {
-    $('#watchFullReplay').show();
     var question_index = (startpoint + current_question) - 1;
 
     video = data[question_index].question_video;
 
     videofull = data[question_index].question_alt_video;
-    console.log(video);
-    console.log(videofull);
+    //console.log(video);
+    //console.log(videofull);
 
     document.getElementById("testcontainer").innerHTML += '<div class="videorow" id="videorow"></div>';
 
@@ -637,20 +627,20 @@ function SaveATest() {
     test_title = data[0].test_title;
     correct = localStorage.answers_correct;
     incorrect = localStorage.answers_incorrect;
-    console.log (localStorage.sessiondate = sdate);
-    console.log (localStorage.test_id = test_id);
-    console.log (localStorage.test_created = test_created);
-    console.log (localStorage.test_description = test_description);
-    console.log (localStorage.test_focus = test_focus);
+    //console.log (localStorage.sessiondate = sdate);
+    //console.log (localStorage.test_id = test_id);
+    //console.log (localStorage.test_created = test_created);
+    //console.log (localStorage.test_description = test_description);
+    //console.log (localStorage.test_focus = test_focus);
     localStorage.test_question_count = test_question_count;
-    console.log (localStorage.test_question_order = test_question_order);
-    console.log (localStorage.test_team = test_team);
-    console.log (localStorage.test_title = test_title);
-    console.log (localStorage.answers_correct = correct);
-    console.log (localStorage.answers_incorrect = incorrect);
-    console.log('MADE IT');
-    console.log ('Sdate' + localStorage.sessiondate);
-    console.log ('test_id' + localStorage.test_id);
+    //console.log (localStorage.test_question_order = test_question_order);
+    //console.log (localStorage.test_team = test_team);
+    //console.log (localStorage.test_title = test_title);
+    //console.log (localStorage.answers_correct = correct);
+    //console.log (localStorage.answers_incorrect = incorrect);
+    //console.log('MADE IT');
+    //console.log ('Sdate' + localStorage.sessiondate);
+    //console.log ('test_id' + localStorage.test_id);
     UpdateTest();
 }
 
@@ -659,7 +649,7 @@ function SaveATest() {
 //-------------UpdateTest----------------//
 //-----------------------------//
 function UpdateTest() {
-    console.log('MADE IT-2');
+    //console.log('MADE IT-2');
     var xx = localStorage.savesessionid;
 
     sdate = localStorage.sessiondate;
@@ -885,7 +875,7 @@ function AJAX_JSON_Req(url, callback) {
 
 
 // Function to load data from JSON
-console.log("LOAD DATA FROM JSON");
+//console.log("LOAD DATA FROM JSON");
 AJAX_JSON_Req('results.json', function (callback) {
     data = callback;
 //check if we got something
