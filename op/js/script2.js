@@ -393,6 +393,7 @@ function submitAnswer(buttonid, question, x, y) {
 
     } else if (testmode == "quiz") {
         document.getElementById("feedbackrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
+        $('#myModal .modal-body > h2').remove();
         localStorage.test_question_answered = buttonid;// answerarray[buttonid];
         disableQuestion(test_id);//disables buttons
         SaveAQuestion();
@@ -499,7 +500,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML += '<div style="text-align:center;"><div class="feedback-header"><h1>CORRECT!</h1></div></div> ';
+            $('#myModal .modal-body').prepend('<h2>That\'s correct.</h2>');
         }
 
         correct++;
@@ -518,7 +519,8 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML += '<div style="text-align:center;"><div class="feedback-header"><h2>SORRY INCORRECT!</h2></div><h2>The Correct Answer Was: ' + answertext + '</h2></div>';
+            document.getElementById("feedbackrow").innerHTML += '<h2>The Correct Answer Was: ' + answertext + '</h2>';
+            $("#myModal .modal-body").prepend('<h2>That\'s Incorrect.</h2>');
         }
 
         incorrect++;

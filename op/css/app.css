@@ -129,7 +129,56 @@
     width: 0;
 }
 
+.modal h2 {
+    color: #F4D33C;
+    font-weight: normal;
+}
+
+.modal #feedbackrow h2 {
+	color: lightslategray;
+    font-size: 24px;
+}
+
 .modal, .modal-footer {
     background-color: #313131 !important;
     border-radius: 0 !important;
+    text-align: left;
+}
+
+.modal-footer {
+    border: none !important;
+    padding-top: 0 !important;
+    -webkit-box-shadow: none !important; 
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.modal .btn {
+    padding: 10px 15px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    border: none;
+    border-radius: 0;
+    -webkit-transition: border .25s linear,color .25s linear,background-color .25s linear;
+    transition: border .25s linear,color .25s linear,background-color .25s linear;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.modal .btn-inverse {
+    color: #fff;
+
+    text-shadow: none;
+    background-image: none;
+
+    border-color: #222 #222 #000;
+    filter: none;
+
+    background-color: #222;
+}
+
+.modal .btn-inverse:hover,
+.modal .btn-inverse:focus,
+.modal .btn-inverse:active {
+	background-color: #000;
 }
