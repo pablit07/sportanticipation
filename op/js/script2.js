@@ -350,7 +350,7 @@ function LoadRndVideo() {
     //console.log(video);
     //console.log(videofull);
 
-    document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div id="feedbackrow"></div><div class="videorow" id="videorow"></div><div id="answerrow" class="answerrow"><div class="answerrowlabel"><label>Choose The Correct Pitch</span></div><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div></div>';
+    document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div class="videorow" id="videorow"></div><div id="answerrow" class="answerrow"><div class="answerrowlabel"><label>Choose The Correct Pitch</span></div><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div></div>';
 
     document.getElementById("videorow").innerHTML = '<video height="100%" id="video"  autoplay><source src="../videos/001/' + video + '" type="video/mp4"/></video>';
 
@@ -392,12 +392,12 @@ function submitAnswer(buttonid, question, x, y) {
         contTest();
 
     } else if (testmode == "quiz") {
-        document.getElementById("answerrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
+        document.getElementById("feedbackrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
         localStorage.test_question_answered = buttonid;// answerarray[buttonid];
         disableQuestion(test_id);//disables buttons
         SaveAQuestion();
         showResult(buttonid); //shows result
-
+        $('#myModal').modal()
 
     }
 
@@ -499,7 +499,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:green;"><h1>CORRECT!</h1></div><div class="col-med-4"><img src="../images/correct.gif" style="border:0" alt="Correct!"/> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button> <button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button type="button" class="btn btn-success" onclick="contTest()">Continue</button> <img src="../images/correct.gif" style="border:0" alt="Correct!"/>  <h2></div> </div> ';
+            document.getElementById("feedbackrow").innerHTML += '<div style="text-align:center;"><div class="feedback-header"><h1>CORRECT!</h1></div></div> ';
         }
 
         correct++;
@@ -518,7 +518,7 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML = '<div class="container" style="text-align:center;"><div class="col-med-4" style="color:red;"><h2>SORRY INCORRECT!</h2><img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /> <button class="btn btn-primary" type="button" class="btn btn-primary" onclick="play_re()">Replay</button><button type="button" class="btn btn-warning" onclick="play_full()">Watch Full Pitch</button><button class="btn btn-success" type="button" onclick="contTest()">Continue</button> <img src="../images/incorrect.gif" style="border:0" alt="Incorrect!" /><h2>The Correct Answer Was: ' + answertext + '</h2></div> </div>';
+            document.getElementById("feedbackrow").innerHTML += '<div style="text-align:center;"><div class="feedback-header"><h2>SORRY INCORRECT!</h2></div><h2>The Correct Answer Was: ' + answertext + '</h2></div>';
         }
 
         incorrect++;

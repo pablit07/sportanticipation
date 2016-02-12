@@ -128,3 +128,8 @@
     vertical-align: top;
     width: 0;
 }
+
+.modal, .modal-footer {
+    background-color: #313131 !important;
+    border-radius: 0 !important;
+}
