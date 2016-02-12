@@ -918,7 +918,19 @@ function isset() {
 }
 
 
+function TogglePlayback() {
+    var button = $(this);
 
+    button.hasClass('collapsed') ? button.removeClass('collapsed') : button.addClass('collapsed');
+
+    var video = document.getElementsByTagName('video')[0];
+    
+    if (video && !video.paused) {
+        video.pause();
+    } else if (video) {
+        video.play();
+    }
+}
 
 
 
