@@ -350,7 +350,7 @@ function LoadRndVideo() {
     //console.log(video);
     //console.log(videofull);
 
-    document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div id="feedbackrow"></div><div class="videorow" id="videorow"></div><div id="answerrow" class="answerrow"><div class="answerrowlabel">Choose The Correct Pitch</div><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div></div>';
+    document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div id="feedbackrow"></div><div class="videorow" id="videorow"></div><div id="answerrow" class="answerrow"><div class="answerrowlabel"><label>Choose The Correct Pitch</span></div><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div></div>';
 
     document.getElementById("videorow").innerHTML = '<video height="100%" id="video"  autoplay><source src="../videos/001/' + video + '" type="video/mp4"/></video>';
 

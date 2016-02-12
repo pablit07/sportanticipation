@@ -15,20 +15,33 @@
     background-image: -o-linear-gradient(top,#2d2d2d,#0d0d0d);
     background-image: linear-gradient(to bottom,#2d2d2d,#0d0d0d);
     background-repeat: repeat-x;
-    padding-top: 14px;
+    padding-top: 4px;
 }
 
 .answerrowlabel {
     position: absolute;
-    top: 0;
+    top: -22px;
     left: 0;
     right: 0;
-    height: 14px;
-    background-color: #535353;
     background-image: none;
-    color: #F4D33C;
-    font-size: 11px;
-    line-height: 14px;
+    border-bottom: 1px solid #535353;
+}
+.answerrowlabel label {
+	background-color: #535353;
+    background-image: -moz-linear-gradient(top,#353535,#535353);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#353535),to(#535353));
+    background-image: -webkit-linear-gradient(top,#353535,#535353);
+    background-image: -o-linear-gradient(top,#353535,#535353);
+    background-image: linear-gradient(to bottom,#353535,#535353);
+    background-repeat: repeat-x;
+	font-size: 10px;
+	color: #E9C939;
+	display: inline-block;
+    padding: 0px 8px;
+	border-radius: 4px 4px 0 0;
+	margin-bottom: 0;
+	cursor: default;
+	text-transform: uppercase;
 }
 
 .buttonrow{text-align: center; }
@@ -43,7 +56,7 @@
 	background-color: black;
 	position: absolute;
 	top: 40px;
-	bottom: 40px;
+	bottom: 35px;
 	right: 0;
 	left: 0;
 }
