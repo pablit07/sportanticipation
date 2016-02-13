@@ -43,8 +43,8 @@ console.log("No Change to Manifest");
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-<link rel="stylesheet" href="../css/app.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="https://s3.amazonaws.com/sportanticipation.css/app.css">
+<link rel="stylesheet" href="https://s3.amazonaws.com/sportanticipation.css/bootstrap.min.css">
 <link rel="stylesheet" href="../../css/style.css">
 <script src="../js/jquery.min.js"></script>
     
@@ -140,24 +140,13 @@ console.log("No Change to Manifest");
 </div>
 
 <script>
-// $(function(){
+$(function(){
 
-// var video = $('video')[0];
-// var answers = $('answers')[0];
+    $('body').on('contextmenu', function () {
+        return false;
+    });
 
-// video.addEventListener('playing', function(){
-// $('PLAY').fadeOut();
-
-
-// })
-// video.addEventListener('pause', function(){
-// $('STOP').fadeOut();
-// video.style.visibility='hidden';    
-// answers.style.visibility='visible'; 
-
-// })
-
-// })
+})
 </script> 
 </BODY>
 </HTML>
