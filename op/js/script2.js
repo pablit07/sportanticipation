@@ -353,17 +353,16 @@ function LoadRndVideo() {
     //console.log(video);
     //console.log(videofull);
 
-    document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div class="videorow" id="videorow"></div><div id="answerrow" class="answerrow"><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div></div>';
-
-    document.getElementById("videorow").innerHTML = '<video height="100%" id="video"></video>';
-
     document.getElementById("questionrow").innerHTML = '<div id="question"><p class="question">  ' + data[question_index].question_question + ' <span id="result_' + question_index + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>  </div> ';
 
     var videotag = $('video')[0];
 
     videotag.innerHTML = '<source src="' + videoUrl + video + '" type="video/mp4"/>';
+    videotag.removeEventListener('ended', afterReplay, false);
     videotag.load();
     videotag.play();
+
+    document.getElementById("answerrow").innerHTML = '<div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div>';
 
     enableQuestion(test_id);
 
@@ -588,16 +587,18 @@ function disableQuestion(test_id) {
 //-------------LOADS FULL VIDEO----------------//
 //-----------------------------//
 
+function afterReplay() {
+    $('#answerrow').fadeIn();
+    $('#feedbackModal').modal();
+    $('#Continue').focus();
+};
+
 
 //----------PLAY THE FULL CLIP
 function play_full() {
     var videotag = $('video')[0];
     videotag.innerHTML = '<source src="' + videoUrl + videofull + '" type="video/mp4" />';
-    videotag.onended = function() {
-        $('#answerrow').fadeIn();
-        $('#feedbackModal').modal();
-        $('#Continue').focus();
-    };
+    videotag.addEventListener('ended', afterReplay, false);
     $('#answerrow').fadeOut();
     videotag.load();
     videotag.play();
@@ -614,11 +615,7 @@ function play_re() {
     //console.log(videofull);
     var videotag = $('video')[0];
     videotag.innerHTML = '<source src="' + videoUrl + video + '" type="video/mp4" />';
-    videotag.onended = function() {
-        $('#answerrow').fadeIn();
-        $('#feedbackModal').modal();
-        $('#Continue').focus();
-    };
+    videotag.addEventListener('ended', afterReplay, false);
     $('#answerrow').fadeOut();
     videotag.load();
     videotag.play();
