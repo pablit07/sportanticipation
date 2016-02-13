@@ -586,7 +586,7 @@ function disableQuestion(test_id) {
 //----------PLAY THE FULL CLIP
 function play_full() {
     var videotag = $('video')[0];
-    videotag.innerHTML = '<source src="../videos/001/' + videofull + '" type="video/mp4" />';
+    videotag.innerHTML = '<source src="' + videoUrl + videofull + '" type="video/mp4" />';
     videotag.onended = function() {
         $('#answerrow').fadeIn();
         $('#feedbackModal').modal();
@@ -607,7 +607,7 @@ function play_re() {
     //console.log(video);
     //console.log(videofull);
     var videotag = $('video')[0];
-    videotag.innerHTML = '<source src="../videos/001/' + video + '" type="video/mp4" />';
+    videotag.innerHTML = '<source src="' + videoUrl + video + '" type="video/mp4" />';
     videotag.onended = function() {
         $('#answerrow').fadeIn();
         $('#feedbackModal').modal();
