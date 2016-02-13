@@ -580,8 +580,15 @@ function disableQuestion(test_id) {
 
 //----------PLAY THE FULL CLIP
 function play_full() {
-    var vid = document.getElementById("a");
-    vid.innerHTML = ' <video  autoplay controls><source src="../videos/001/' + videofull + '" type="video/mp4" />';
+    var videotag = $('video')[0];
+    videotag.innerHTML = '<source src="../videos/001/' + videofull + '" type="video/mp4" />';
+    videotag.onended = function() {
+        $('#answerrow').fadeIn();
+        $('#myModal').modal();
+    };
+    $('#answerrow').fadeOut();
+    videotag.load();
+    videotag.play();
 }
 
 //REPLAY THE CLIP
@@ -593,11 +600,15 @@ function play_re() {
     videofull = data[question_index].question_alt_video;
     //console.log(video);
     //console.log(videofull);
-
-    document.getElementById("testcontainer").innerHTML += '<div class="videorow" id="videorow"></div>';
-
-    document.getElementById("videorow").innerHTML = '<video height="100%;" id="video"  autoplay><source src="../videos/001/' + video + '" type="video/mp4"/></video>';
-
+    var videotag = $('video')[0];
+    videotag.innerHTML = '<source src="../videos/001/' + video + '" type="video/mp4" />';
+    videotag.onended = function() {
+        $('#answerrow').fadeIn();
+        $('#myModal').modal();
+    };
+    $('#answerrow').fadeOut();
+    videotag.load();
+    videotag.play();
 }
 
 
