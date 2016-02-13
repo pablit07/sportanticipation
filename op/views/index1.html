@@ -121,14 +121,21 @@ console.log("No Change to Manifest");
 
 <div id="buttonrow"></div>
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="feedbackModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
   <div class="modal-body">
     <div id="feedbackrow"></div>
   </div>
   <div class="modal-footer">
     <button class="btn btn-inverse" type="button" onclick="play_re()" data-dismiss="modal">Replay</button>
     <button type="button" class="btn btn-inverse" onclick="play_full()" data-dismiss="modal">Watch Full Pitch</button>
-    <button class="btn btn-inverse" type="button" onclick="contTest()" data-dismiss="modal">Continue</button>
+    <button id="Continue" class="btn btn-inverse" type="button" onclick="contTest()" data-dismiss="modal">Continue</button>
+  </div>
+</div>
+
+<div id="scoreModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <button id="Continue" class="btn btn-inverse" type="button" onclick="window.location.reload()" data-dismiss="modal">Restart</button>
   </div>
 </div>
 

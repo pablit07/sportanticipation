@@ -393,13 +393,13 @@ function submitAnswer(buttonid, question, x, y) {
 
     } else if (testmode == "quiz") {
         document.getElementById("feedbackrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
-        $('#myModal .modal-body > h2').remove();
+        $('#feedbackModal .modal-body > h2').remove();
         localStorage.test_question_answered = buttonid;// answerarray[buttonid];
         disableQuestion(test_id);//disables buttons
         SaveAQuestion();
         showResult(buttonid); //shows result
-        $('#myModal').modal()
-
+        $('#feedbackModal').modal()
+        $('#Continue').focus();
     }
 
 }//END
@@ -481,14 +481,16 @@ function showScore() {
 //localStorage.incorrect=0;    
     var pc = Math.round(( tcorrect / ansx) * 100);
 
-    document.getElementById("reportdiv").innerHTML = "<div > <h2>You scored " + correct + " out of " + ansx + "</h2> ";
-
-    document.getElementById("reportdiv").innerHTML += "<div> <h2>You correctly answered " + pc + "% of the questions for: </h2> </div></div><div id='mainholder'></div>";
+    $('#scoreModal .modal-body').html("<div > <h2>You scored " + correct + " out of " + ansx + "</h2> " +
+        "<div id='feedbackrow'> <h2>You correctly answered " + pc + "% of the questions.</h2> </div></div><div id='mainholder'></div>");
     localStorage.correct = correct;
 
     tcorrect = ansx = pc = '';
     localStorage.correct = localStorage.incorrect = 0;
-    document.getElementById("question").innerHTML = '';
+
+    $('video').hide();
+
+    setTimeout(function() { $('#scoreModal').modal(); }, 500);
 }
 
 function checkAnswer(button, isTest) {
@@ -500,7 +502,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            $('#myModal .modal-body').prepend('<h2>That\'s correct.</h2>');
+            $('#feedbackModal .modal-body').prepend('<h2>That\'s correct.</h2>');
         }
 
         correct++;
@@ -520,7 +522,7 @@ function checkAnswer(button, isTest) {
 
         if (!isTest) {
             document.getElementById("feedbackrow").innerHTML += '<h2>The Correct Answer Was: ' + answertext + '</h2>';
-            $("#myModal .modal-body").prepend('<h2>That\'s Incorrect.</h2>');
+            $("#feedbackModal .modal-body").prepend('<h2>That\'s Incorrect.</h2>');
         }
 
         incorrect++;
@@ -584,7 +586,8 @@ function play_full() {
     videotag.innerHTML = '<source src="../videos/001/' + videofull + '" type="video/mp4" />';
     videotag.onended = function() {
         $('#answerrow').fadeIn();
-        $('#myModal').modal();
+        $('#feedbackModal').modal();
+        $('#Continue').focus();
     };
     $('#answerrow').fadeOut();
     videotag.load();
@@ -604,7 +607,8 @@ function play_re() {
     videotag.innerHTML = '<source src="../videos/001/' + video + '" type="video/mp4" />';
     videotag.onended = function() {
         $('#answerrow').fadeIn();
-        $('#myModal').modal();
+        $('#feedbackModal').modal();
+        $('#Continue').focus();
     };
     $('#answerrow').fadeOut();
     videotag.load();
