@@ -181,6 +181,11 @@ function StartOldTest() {
 
 
 function GoLogin() {
+    // hack for ios
+    var videotag = $('video')[0];
+    videotag.load();
+    videotag.play();
+    
     $('#start').hide();
     PreTest();
 
