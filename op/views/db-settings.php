@@ -4,10 +4,10 @@ SportsTest by @ENOXH
 */
 
 //Database Information
-$db_host = "localhost"; //Host address (most likely localhost)
-$db_name = "sportstestdb"; //Name of Database
-$db_user = "enoxhsi"; //Name of database user
-$db_pass = "IVsport1235"; //Password for database user
+$db_host = isset($_ENV['RDS_HOSTNAME']) ? $_ENV['RDS_HOSTNAME'] : "localhost"; //Host address (most likely localhost)
+$db_name = isset($_ENV['RDS_DB_NAME']) ? $_ENV['RDS_DB_NAME'] : "sportstestdb"; //Name of Database
+$db_user = isset($_ENV['RDS_USERNAME']) ? $_ENV['RDS_USERNAME'] : "enoxhsi"; //Name of database user
+$db_pass = isset($_ENV['RDS_PASSWORD']) ? $_ENV['RDS_PASSWORD'] : "IVsport1235"; //Password for database user
 $db_table_prefix = "st_";
 
 GLOBAL $errors;
