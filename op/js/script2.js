@@ -31,6 +31,9 @@ testmode = "quiz";
 //get the date
 datestamp = GetDate();
 
+var videoUrl = window.location.hostname.indexOf('elasticbeanstalk') != -1
+    ? 'https://s3.amazonaws.com/sportanticipation.videos/'
+    : '../videos/001/'
 
 //Test Modes
 
@@ -352,7 +355,7 @@ function LoadRndVideo() {
 
     document.getElementById("testcontainer").innerHTML = '<div id="netstatus" style="pull-left;"></div><div class="pull-right" style="position:relative; margin-right:100px;"><span id="plid"></span><small><span id="status"></span></small><span id="sessioninfo"></span></div><div id="loginbox" style="max-width:100%; text-align:center;"></div><div id="plid"></div><div id="sessioninfo"></div><div id="message"></div><div class="inforow" id="inforow"></div><div id="status"></div><div id="questionrow"></div><div class="videorow" id="videorow"></div><div id="answerrow" class="answerrow"><div class="answerrowlabel"><label>Choose The Correct Pitch</span></div><div class="btn-group"><div id="buttonrow" class="buttonrow"></div></div></div>';
 
-    document.getElementById("videorow").innerHTML = '<video height="100%" id="video"  autoplay><source src="../videos/001/' + video + '" type="video/mp4"/></video>';
+    document.getElementById("videorow").innerHTML = '<video height="100%" id="video"  autoplay><source src="' + videoUrl + video + '" type="video/mp4"/></video>';
 
     document.getElementById("questionrow").innerHTML = '<div id="question"><p class="question">  ' + data[question_index].question_question + ' <span id="result_' + question_index + '"><img src="../images/blank.gif" style="border:0" alt="" /></span></p>  </div> ';
 
