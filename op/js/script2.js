@@ -331,7 +331,7 @@ function ShowButtons() {
 
         for (j = 0; j < answerarray.length; j++) {
 
-            document.getElementById('buttonrow').innerHTML += ('<input type="button" class="btn btn-warning"  name="answer_' + ri + '" value="' + answerarray[ri] + '" id="answer_' + ri + '_' + j + '" class="question_' + ri + '" onclick="submitAnswer(' + ri + ', this, \'question_' + ri + '\', \'label_' + ri + '_' + j + '\')" />');
+            document.getElementById('buttonrow').innerHTML += ('<input type="button" class="btn btn-warning" style="margin-right: 5px; margin-left: 5px;" name="answer_' + ri + '" value="' + answerarray[ri] + '" id="answer_' + ri + '_' + j + '" class="question_' + ri + '" onclick="submitAnswer(' + ri + ', this, \'question_' + ri + '\', \'label_' + ri + '_' + j + '\')" />');
             ri++;
 
         }
@@ -395,7 +395,7 @@ function submitAnswer(buttonid, question, x, y) {
         contTest();
 
     } else if (testmode == "quiz") {
-        document.getElementById("feedbackrow").innerHTML = '<h2>You Answered: ' + answerarray[buttonid] + '</h2>';
+        document.getElementById("feedbackrow").innerHTML = '<h2>Your Answer: <span style="color: #fff">' + answerarray[buttonid] + '</span></h2>';
         $('#feedbackModal .modal-body > h2').remove();
         localStorage.test_question_answered = buttonid;// answerarray[buttonid];
         disableQuestion(test_id);//disables buttons
@@ -484,8 +484,8 @@ function showScore() {
 //localStorage.incorrect=0;    
     var pc = Math.round(( tcorrect / ansx) * 100);
 
-    $('#scoreModal .modal-body').html("<div > <h2>You scored " + correct + " out of " + ansx + "</h2> " +
-        "<div id='feedbackrow'> <h2>You correctly answered " + pc + "% of the questions.</h2> </div></div><div id='mainholder'></div>");
+    $('#scoreModal .modal-body').html("<div > <h2>Score: " + correct + " out of " + ansx + "</h2> " +
+        "<div id='feedbackrow'> <h2 style='color: #fff'>Percent correct: " + pc + "%</h2> </div></div><div id='mainholder'></div>");
     localStorage.correct = correct;
 
     tcorrect = ansx = pc = '';
@@ -505,7 +505,7 @@ function checkAnswer(button, isTest) {
         localStorage.answered = answerarray[buttonid];
 
         if (!isTest) {
-            $('#feedbackModal .modal-body').prepend('<h2>That\'s correct.</h2>');
+            $('#feedbackModal .modal-body').prepend('<h2>Correct</h2>');
         }
 
         correct++;
@@ -524,8 +524,8 @@ function checkAnswer(button, isTest) {
 //answertext = choices[ri][questionId];
 
         if (!isTest) {
-            document.getElementById("feedbackrow").innerHTML += '<h2>The Correct Answer Was: ' + answertext + '</h2>';
-            $("#feedbackModal .modal-body").prepend('<h2>That\'s Incorrect.</h2>');
+            document.getElementById("feedbackrow").innerHTML += '<h2>Correct Answer: <span style="color: #fff">' + answertext + '</span></h2>';
+            $("#feedbackModal .modal-body").prepend('<h2>Incorrect</h2>');
         }
 
         incorrect++;
