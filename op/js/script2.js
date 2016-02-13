@@ -918,18 +918,29 @@ function isset() {
 }
 
 
-function TogglePlayback() {
-    var button = $(this);
-
-    button.hasClass('collapsed') ? button.removeClass('collapsed') : button.addClass('collapsed');
+function ToggleMenu() {
 
     var video = document.getElementsByTagName('video')[0];
+
+    var isOpen = $('#top-nav').hasClass('menu-open');
     
-    if (video && !video.paused) {
-        video.pause();
+    if (!isOpen) {
+        $('#top-nav').addClass('menu-open');
+        $('.btn-navbar').removeClass('collapsed');
+        $('body').append('<div class="modal-backdrop behind-nav"></div>');
+    }
+    else {
+        $('#top-nav').removeClass('menu-open');
+        $('.btn-navbar').addClass('collapsed');
+        $('.modal-backdrop').remove();
+    }
+
+    if (video && !isOpen) {
+        video.pause();        
     } else if (video) {
         video.play();
     }
+
 }
 
 
